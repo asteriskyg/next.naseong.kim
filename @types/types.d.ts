@@ -28,5 +28,21 @@ declare module 'type' {
     subscription: number | undefined;
   };
 
+  export type Clip = {
+    clipCreatedAt: Date;
+    clipDuration: number;
+    clipLastEdited: Date;
+    contentId: string;
+    contentName: string;
+    creatorId: number;
+    creatorName: string;
+    gameId: number;
+    gameName: string;
+    streamStartedAt: Date;
+    clipName: string;
+    __v: number;
+    _id: string;
+  }
+
   export type ClipListsType = Clip[];
 }
