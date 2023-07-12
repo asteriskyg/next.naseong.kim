@@ -52,7 +52,7 @@ export default class Identity {
     try {
       const token = await axios.get('https://dev.naseong.kim/api/auth/refresh', {
         headers: {
-          Cookie: `Refresh=${this.cookie.get('Refresh') ?? ''}`,
+          Cookie: `Refresh=${this.cookie.get('refresh') ?? ''}`,
         }
       });
 
