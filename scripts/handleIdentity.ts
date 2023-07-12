@@ -1,6 +1,4 @@
 import { GetServerSidePropsContext } from 'next/types';
-import { getCookie, setCookie } from 'cookies-next';
-import { OptionsType } from 'cookies-next/lib/types';
 import axios from 'axios';
 import CookieManager from './cookieManager';
 
@@ -54,7 +52,7 @@ export default class Identity {
     try {
       const token = await axios.get('https://dev.naseong.kim/api/auth/refresh', {
         headers: {
-          Cookie: `Refresh=${this.cookie.get('refresh') ?? ''}`,
+          Cookie: `Refresh=${this.cookie.get('Refresh') ?? ''}`,
         }
       });
 
