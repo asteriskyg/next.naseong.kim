@@ -1,6 +1,6 @@
-import type { GetServerSidePropsContext } from 'next'
 import axios from 'axios'
 import Identity from '../scripts/handleIdentity';
+import type { GetServerSidePropsContext } from 'next'
 import type { StreamInfoType, IdentityType, ClipListsType } from 'type';
 import DefaultHeader from '@/components/layouts/default/DefaultHeader';
 import DefaultFooter from '@/components/layouts/default/DefaultFooter';
@@ -8,16 +8,30 @@ import RecentClipLists from '@/components/RecentClipLists';
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const identity = new Identity(context);
+  let me = await identity.get();
+
+  const appAccessToken = await axios
+    .post(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`)
+    .catch(function () {
+      return undefined;
+    }) as { data: { access_token: string } } | undefined;
 
   const streamData = await axios
-    .get('https://dev.naseong.kim/api/stream')
+    .get(`https://api.twitch.tv/helix/streams?user_id=${process.env.TWITCH_BROADCASTER_ID}`, {
+      headers: {
+        'Authorization': `Bearer ${appAccessToken?.data.access_token}`,
+        'Client-Id': process.env.TWITCH_CLIENT_ID
+      }
+    })
     .catch(function () {
       return undefined;
     }) as { data: StreamInfoType } | undefined;
 
-  const stream = streamData?.data || null;
-
-  let me = await identity.get();
+  const clipListsData = await axios
+    .get('https://dev.naseong.kim/api/clip/recent')
+    .catch(function () {
+      return undefined;
+    }) as { data: ClipListsType } | undefined;
 
   if(!me) {
     const getIdentity = await identity.refresh();
@@ -26,16 +40,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
   }
 
-  const clipListsData = await axios
-    .get('https://dev.naseong.kim/api/clip/recent')
-    .catch(function () {
-      return undefined;
-    }) as { data: ClipListsType } | undefined;
-
+  const stream = streamData?.data || null;
   const clipLists = clipListsData?.data || [];
 
   return {
-    props: { stream, me, clipLists }
+    props: { stream, clipLists, me }
   }
 }
 
