@@ -1,10 +1,11 @@
+'use client';
 import { useState } from 'react';
 import axios from 'axios';
 import ClipItem from './ClipItem';
 import type { ClipListsType, Clip } from 'type';
 
-export const renderClips = (clips: ClipListsType | []) => {
-  if(!clips || clips.length === 0) {
+export const renderClips = (clips: ClipListsType | undefined) => {
+  if(!clips) {
     return undefined;
   }
 
@@ -18,7 +19,7 @@ export const renderClips = (clips: ClipListsType | []) => {
   })
 }
 
-export default function RecentClipLists({ clipLists }: { clipLists: ClipListsType | [] }) {
+export default function RecentClipLists({ clipLists }: { clipLists: ClipListsType | undefined }) {
   const [clips, setClips] = useState(clipLists);
   const [clipIndex, setClipIndex] = useState(1);
 

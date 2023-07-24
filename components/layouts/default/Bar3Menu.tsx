@@ -21,7 +21,7 @@ const lists = [
   { name: '김나성 트게더', href: 'https://tgd.kr/s/naseongkim', icon: ChatBubbleLeftRightIcon }
 ]
 
-export default function MenuComponent({ me }: { me: IdentityType | null }) {
+export default function MenuComponent({ me }: { me: IdentityType | undefined }) {
   if(!me) {
     return (
       <Popover className="relative flex flex-col">

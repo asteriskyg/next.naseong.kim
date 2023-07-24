@@ -1,18 +1,17 @@
+'use client';
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Dialog } from '@headlessui/react'
 import { LockClosedIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid'
-import { StreamInfoType, IdentityType } from 'type'
+import { Stream, IdentityType } from 'type'
 import Bar3Menu from './Bar3Menu'
 import PopoverButton from '@/components/tailwind/PopoverButton'
 import VerticalNavigation from '@/components/tailwind/Navigation/VerticalNavigation'
 
-function liveBadge(stream: StreamInfoType | null) {
-  if (!stream) {
-    return undefined;
-  }
+function liveBadge(stream: Stream | undefined) {
+  if (!stream) return undefined;
 
   return (
     <Link
@@ -36,7 +35,7 @@ function TwitchIcon() {
   )
 }
 
-function myProfile(me: IdentityType | null) {
+function myProfile(me: IdentityType | undefined) {
   if(!me) {
     return (
       <PopoverButton
@@ -73,7 +72,10 @@ const lists = [
   { name: '김나성 트게더', description: undefined, href: 'https://tgd.kr/s/naseongkim', icon: ChatBubbleLeftRightIcon }
 ]
 
-export default function DefaultHeader({ stream, me }: { stream: StreamInfoType | null, me: IdentityType | null }) {
+export default function DefaultHeader({ stream, me }: {
+  stream: Stream | undefined,
+  me: IdentityType | undefined
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
