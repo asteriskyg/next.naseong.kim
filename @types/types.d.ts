@@ -1,5 +1,9 @@
 declare module 'type' {
   export type StreamInfoType = {
+    data: Stream[]
+  };
+
+  export type Stream = {
     id: number;
     user_id: number;
     user_login: string;
