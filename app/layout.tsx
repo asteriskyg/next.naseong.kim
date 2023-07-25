@@ -60,9 +60,7 @@ export default async function RootLayout({ children }: {
             stream={stream?.data[0]}
             me={identity}
           />
-          <div className="py-10">
-            {children}
-          </div>
+          {children}
           <DefaultFooter />
         </main>
         <Analytics />

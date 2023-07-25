@@ -14,14 +14,14 @@ export default async function Index() {
   const clips = await GetRecentClips();
 
   return (
-    <div>
+    <div className="py-10">
       <header>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">클립 목록</h1>
         </div>
       </header>
       <main>
-        <div className="mx-auto max-w-7xl py-8 px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl py-8 px-6">
           <RecentClipLists clipLists={clips} />
         </div>
       </main>
