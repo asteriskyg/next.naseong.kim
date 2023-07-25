@@ -17,7 +17,7 @@ function liveBadge(stream: Stream | undefined) {
     <Link
       href="/live"
       target="_blank"
-      className="inline-flex items-center gap-x-2 rounded-md bg-red-100 px-2 py-1 text-sm font-medium text-red-700"
+      className="inline-flex items-center gap-x-2 rounded-lg bg-red-100 hover:bg-red-200 px-2 py-1 text-sm font-medium text-red-500 transition-colors"
     >
       <svg className="h-2 w-2 fill-red-500" viewBox="0 0 6 6" aria-hidden="true">
         <circle cx={3} cy={3} r={3} />
@@ -80,9 +80,13 @@ export default function DefaultHeader({ stream, me }: {
 
   return (
     <header className="bg-white/80 backdrop-blur-xl border-b sticky top-0 z-10">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 py-3 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 py-3">
         <div className="flex items-center gap-x-3">
-          <Link href="/" className="-m-1.5 p-1.5 text-2xl text-black font-bold">na.clip</Link>
+          <Link href="/" className="-m-1.5 p-1.5 text-2xl">
+            <span className="text-2xl text-black">
+              na.<b>clip</b>
+            </span>
+          </Link>
           {liveBadge(stream)}
         </div>
         <div className="flex lg:hidden">
@@ -101,20 +105,23 @@ export default function DefaultHeader({ stream, me }: {
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 px-6 py-3">
           <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5">
-              <span className="text-2xl text-black sm:text-white">
-                na.<b>clip</b>
-              </span>
-            </Link>
+            <div className="flex items-center gap-x-3 sm:opacity-0 sm:pointer-events-none">
+              <Link href="/" className="-m-1.5 p-1.5">
+                <span className="text-2xl text-black">
+                  na.<b>clip</b>
+                </span>
+              </Link>
+              {liveBadge(stream)}
+            </div>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 h-8 w-8"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">메뉴 닫기</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              <XMarkIcon className="shrink-0 h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <div className="mt-6 flow-root">
