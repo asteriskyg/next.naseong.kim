@@ -33,6 +33,7 @@ async function GetStream() {
   if(!appAccessToken || !process.env.TWITCH_BROADCASTER_ID || !process.env.TWITCH_CLIENT_ID) return undefined;
 
   const res = await fetch(`https://api.twitch.tv/helix/streams?user_id=${process.env.TWITCH_BROADCASTER_ID}`, {
+    next: { revalidate: 300 },
     headers: {
       'Authorization': `Bearer ${appAccessToken?.access_token}`,
       'Client-Id': process.env.TWITCH_CLIENT_ID
