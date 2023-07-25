@@ -18,9 +18,9 @@ const navigation = [{
 export default function DefaultFooter() {
   return (
     <footer className="bg-white border-t">
-      <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
         <Link href="/" className="text-center font-bold leading-5 text-gray-500 hover:text-black transition-colors">
-          naseong.kim
+          next.naseong.kim
         </Link>
         <div className="flex justify-center space-x-6">
           {navigation.map((item) => (
