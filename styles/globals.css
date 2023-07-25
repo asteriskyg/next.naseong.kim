@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 @import '../public/SUIT/SUIT.css';
+@import '../public/tossface1.5/tossface.css';
+
 body {
-    font-family: 'SUIT', sans-serif;
+    font-family: 'SUIT', 'Tossface', sans-serif;
 }
