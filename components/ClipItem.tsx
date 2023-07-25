@@ -17,12 +17,10 @@ export default function ClipItem({ clip }: { clip: Clip }) {
           <Image
             src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
             alt=""
-            width={720}
-            height={480}
+            width={640}
+            height={360}
           />
-          <div
-            className="absolute bottom-2 right-2 flex h-6 w-11 items-center justify-center rounded-lg bg-twitch-dark/60 text-sm text-white backdrop-blur-md"
-          >
+          <div className="absolute bottom-2 right-2 flex h-6 w-11 items-center justify-center rounded-lg bg-twitch-dark/60 text-sm text-white backdrop-blur-md">
             { 
               clip.clipDuration > 59
                 ? clip.clipDuration - 60 < 10
