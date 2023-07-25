@@ -19,12 +19,12 @@ export default function DefaultFooter() {
   return (
     <footer className="bg-white border-t">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between lg:px-8">
-        <Link href="/" className="text-center font-bold leading-5 text-gray-500">
+        <Link href="/" className="text-center font-bold leading-5 text-gray-500 hover:text-black transition-colors">
           naseong.kim
         </Link>
         <div className="flex justify-center space-x-6">
           {navigation.map((item) => (
-            <Link key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
+            <Link key={item.name} href={item.href} className="text-gray-400 hover:text-black transition-colors">
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
             </Link>
