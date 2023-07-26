@@ -25,7 +25,7 @@ declare module 'type' {
     displayName: string;
     email: string;
     profileImageUrl: string;
-    profileBackgroundUrl: string;
+    profileBackgroundUrl: string | undefined;
     twitchUserId: number;
     userType: string;
     follow: Date | undefined;
