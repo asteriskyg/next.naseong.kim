@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'customer-lsoi5zwkd51of53g.cloudflarestream.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.naseong.kim',
+      },
     ],
   },
 }
