@@ -33,7 +33,7 @@ export default function ClipItem({ clip }: { clip: Clip }) {
       </div>
       <div className="px-4 py-4 sm:px-6">
       <div className=" text-black dark:text-slate-200">
-        <div className="line-clamp-1 text-xl font-semibold tossface">
+        <div className="line-clamp-1 text-xl font-semibold">
           { clip.contentName }
         </div>
         <div className="mb-3">

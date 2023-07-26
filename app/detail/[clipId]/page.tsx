@@ -104,7 +104,7 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
         </a>
       </div>
       <div className="mx-auto max-w-7xl py-8 px-6 sm:px-0">
-        <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 mb-6">클립 목록</h1>
+        <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 mb-6 suite">클립 목록</h1>
         <RecentClipLists clipLists={clipLists} />
       </div>
     </div>

@@ -17,7 +17,7 @@ export default async function Index() {
     <div className="py-10">
       <header>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">클립 목록</h1>
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 suite">클립 목록</h1>
         </div>
       </header>
       <main>
