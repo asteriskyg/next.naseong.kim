@@ -58,11 +58,11 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
 
   return (
     <div className="mx-auto max-w-7xl sm:p-6 sm:pb-0">
-      <div className="relative aspect-video sm:overflow-hidden sm:rounded-lg sm:border border-b md:rounded-lg dark:border-neutral-600">
+      <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border md:rounded-2xl dark:border-neutral-600">
         <iframe
           src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/iframe?preload=true&loop=true&poster=https%3A%2F%2Fcustomer-lsoi5zwkd51of53g.cloudflarestream.com%2F${clip.contentId}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          className="h-full w-full"
+          className="border-0 absolute top-0 left-0 w-full h-full"
           allowFullScreen
         />
       </div>
@@ -104,7 +104,14 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
         </a>
       </div>
       <div className="mx-auto max-w-7xl py-8 px-6 sm:px-0">
-        <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 mb-6 suite">클립 목록</h1>
+        <div className="relative mb-6">
+          <div className="absolute inset-0 flex items-center" aria-hidden="true">
+            <div className="w-full border-t border-gray-300" />
+          </div>
+          <div className="relative flex justify-start">
+            <span className="bg-white pr-3 text-xl font-semibold leading-6 text-gray-900">다른 클립 더 보기</span>
+          </div>
+        </div>
         <RecentClipLists clipLists={clipLists} />
       </div>
     </div>
