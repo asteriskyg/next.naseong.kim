@@ -44,8 +44,6 @@ declare module 'type' {
     gameName: string;
     streamStartedAt: Date;
     clipName: string;
-    __v: number;
-    _id: string;
   }
 
   export type ClipListsType = Clip[];
