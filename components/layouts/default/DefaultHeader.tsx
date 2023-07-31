@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Dialog } from '@headlessui/react'
@@ -7,25 +7,9 @@ import { LockClosedIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outlin
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid'
 import { Stream, IdentityType } from 'type'
 import Bar3Menu from './Bar3Menu'
+import LiveBadge from '@/components/LiveBadge';
 import PopoverButton from '@/components/tailwind/PopoverButton'
 import VerticalNavigation from '@/components/tailwind/Navigation/VerticalNavigation'
-
-function liveBadge(stream: Stream | undefined) {
-  if (!stream) return undefined;
-
-  return (
-    <Link
-      href="/live"
-      target="_blank"
-      className="inline-flex items-center gap-x-2 rounded-lg bg-red-100 hover:bg-red-200 px-2 py-1 text-sm font-medium text-red-500 transition-colors"
-    >
-      <svg className="h-2 w-2 fill-red-500" viewBox="0 0 6 6" aria-hidden="true">
-        <circle cx={3} cy={3} r={3} />
-      </svg>
-      LIVE
-    </Link>
-  )
-}
 
 function TwitchIcon() {
   return (
@@ -87,7 +71,9 @@ export default function DefaultHeader({ stream, me }: {
               na.<b>clip</b>
             </span>
           </Link>
-          {liveBadge(stream)}
+          <Suspense fallback={<p>...</p>}>
+            <LiveBadge stream={stream} />
+          </Suspense>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -113,7 +99,9 @@ export default function DefaultHeader({ stream, me }: {
                   na.<b>clip</b>
                 </span>
               </Link>
-              {liveBadge(stream)}
+              <Suspense fallback={<p>...</p>}>
+                <LiveBadge stream={stream} />
+              </Suspense>
             </div>
             <button
               type="button"
