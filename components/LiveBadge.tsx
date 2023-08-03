@@ -5,7 +5,11 @@ async function GetStream() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/twitch/stream`)
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<StreamInfoType>;
+
+  const stream = await res.json()
+  if (stream.length === 0) return undefined;
+
+  return stream as Promise<StreamInfoType>;
 }
 
 export default async function LiveBadge() {

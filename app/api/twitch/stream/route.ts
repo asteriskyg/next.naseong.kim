@@ -29,7 +29,7 @@ async function GetStream() {
 
 export async function GET() {
   const stream = await GetStream();
-  console.log(stream)
-  if(!stream?.data[0]) return NextResponse.json({}, { status: 404 });
+
+  if(!stream?.data[0]) return NextResponse.json([]);
   return NextResponse.json(stream.data[0]);
 }
