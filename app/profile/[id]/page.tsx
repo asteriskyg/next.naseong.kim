@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import type { IdentityType } from 'type';
-import RecentClipLists from '@/components/RecentClipLists';
-import type { ClipListsType } from 'type';
-import ProfileBackground from '@/components/ProfileBackground';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
+import RecentClipLists from '@/components/RecentClipLists';
+import ProfileBackground from '@/components/ProfileBackground';
+import type { IdentityType, ClipListsType } from 'type';
 dayjs.extend(relativeTime);
 
 async function GetRecentClips() {
@@ -84,11 +83,11 @@ export default async function Profile({ params }: { params: { id: string } }) {
                 {(() => {
                   if(user.userType === 'viewer') return undefined
                   return (
-                    <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl bg-slate-100 px-3 py-2 text-sm sm:text-base font-medium text-slate-600">
+                    <span className="shrink-0 rounded-xl bg-slate-100 px-3 py-2 text-sm sm:text-base font-medium text-slate-600">
                       {(() => {
-                        if(user.userType === 'developer') return <span><span className='text-base sm:text-lg'>🔧</span> 개발자</span>
-                        else if(user.userType === 'editor') return <span><span className='text-base sm:text-lg'>🐼</span> 편집자</span>
-                        else return <span><span className='text-base sm:text-lg'>🔧</span> 스트리머</span>
+                        if(user.userType === 'developer') return <span className='inline-flex items-center gap-x-1.5'><span className='text-base sm:text-lg'>🔧</span> 개발자</span>
+                        else if(user.userType === 'editor') return <span className='inline-flex items-center gap-x-1.5'><span className='text-base sm:text-lg'>🐼</span> 편집자</span>
+                        else return <span><span className='inline-flex items-center gap-x-1.5 text-base sm:text-lg'>🔧</span> 스트리머</span>
                       })()}
                     </span>
                   )
