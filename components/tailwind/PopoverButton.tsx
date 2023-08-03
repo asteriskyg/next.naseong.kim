@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface ButtonProps {
   name: string;
   description?: string;
@@ -12,10 +14,10 @@ export default function VerticalNavigation({ button }: { button: ButtonProps }) 
         <button.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600 transition-all duration-300" aria-hidden="true" />
       </div>
       <div>
-        <a href={button.href} className="font-semibold text-gray-900">
+        <Link href={button.href} className="font-semibold text-gray-900">
           {button.name}
           <span className="absolute inset-0" />
-        </a>
+        </Link>
         <p className="text-gray-600">{button.description}</p>
       </div>
     </div>
