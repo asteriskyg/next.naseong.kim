@@ -88,6 +88,9 @@ export default function DefaultHeader({ me }: {
           <Bar3Menu me={me} />
         </div>
       </nav>
+      <div className='border-t bg-white/30 p-6 py-2 text-center text-sm'>
+        <span className='text-gray-500'>next.naseong.kim build {process.env.VERCEL_GIT_COMMIT_SHA}</span>
+      </div>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 px-6 py-3">
