@@ -1,8 +1,15 @@
-import Link from 'next/link'
-import type { Stream } from 'type'
+import Link from "next/link";
+import type { StreamInfoType } from "type";
 
-export default function LiveBadge(props: { stream: Stream | undefined }) {
-  const stream = props.stream;
+async function GetStream() {
+  const res = await fetch(`${process.env.NEXT_APP_HOST}/api/twitch/stream`)
+
+  if (!res.ok) return undefined;
+  return res.json() as Promise<StreamInfoType>;
+}
+
+export default async function LiveBadge() {
+  const stream = await GetStream();
   if (!stream) return undefined;
 
   return (

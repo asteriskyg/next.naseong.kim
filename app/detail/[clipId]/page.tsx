@@ -1,9 +1,10 @@
+import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
 import RecentClipLists from "@/components/RecentClipLists";
-import { Clip, ClipListsType } from "type";
 import 'dayjs/locale/ko';
+import type { Clip, ClipListsType } from "type";
 dayjs.extend(relativeTime);
 
 async function GetClipData(id: string) {
@@ -87,7 +88,7 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
         </div>
       </div>
       <div className="flex px-6 sm:px-0 mb-6">
-        <a
+        <Link
           href={`/profile/${user.twitchUserId}`}
           className="w-full sm:w-auto flex items-center justify-between bg-slate-100 dark:bg-neutral-800 rounded-2xl px-4 sm:pl-4 sm:pr-0 py-3 text-dark dark:text-slate-200 hover:bg-slate-200 hover:dark:bg-neutral-700 transition-all ease-in-out sm:hover:pr-4 after:w-2 sm:after:block after:content-['>'] after:-translate-x-full hover:after:translate-x-0 after:opacity-0 hover:after:opacity-100 after:transition-all after:ease-in-out after:sm:ml-2"
         >
@@ -101,7 +102,7 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
             />
             { user.displayName }
             </span>
-        </a>
+        </Link>
       </div>
       <div className="mx-auto max-w-7xl py-8 px-6 sm:px-0">
         <div className="relative mb-6">
