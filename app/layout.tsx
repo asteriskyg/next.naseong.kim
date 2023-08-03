@@ -26,13 +26,9 @@ export default async function RootLayout({ children }: {
   return (
     <html lang="ko">
       <body>
-        <main>
-          <DefaultHeader
-            me={identity}
-          />
-          {children}
-          <DefaultFooter />
-        </main>
+        <DefaultHeader me={ identity } />
+        <main>{ children }</main>
+        <DefaultFooter />
         <Analytics />
       </body>
     </html>
