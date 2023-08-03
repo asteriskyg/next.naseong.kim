@@ -25,9 +25,7 @@ async function GetUserData(id: string) {
 }
 
 async function GetRecentClips() {
-  const res = await fetch('https://dev.naseong.kim/api/clip/recent', {
-    method: 'GET',
-  })
+  const res = await fetch('https://dev.naseong.kim/api/clip/recent')
 
   if (!res.ok) return undefined;
   return res.json() as Promise<ClipListsType>;
@@ -50,11 +48,7 @@ export default async function ClipDetail({ params }: { params: { clipId: string 
   const [clip, user, clipLists] = await Promise.all([clipData, userData, clipListsData]);
 
   if(!clip) return (
-    <div>
-      <main>
-        404
-      </main>
-    </div>
+    <div>404</div>
   )
 
   return (

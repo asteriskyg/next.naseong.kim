@@ -9,9 +9,7 @@ import 'dayjs/locale/ko';
 dayjs.extend(relativeTime);
 
 async function GetRecentClips() {
-  const res = await fetch('https://dev.naseong.kim/api/clip/recent', {
-    method: 'GET',
-  })
+  const res = await fetch('https://dev.naseong.kim/api/clip/recent')
 
   if (!res.ok) return undefined;
   return res.json() as Promise<ClipListsType>;
@@ -32,7 +30,9 @@ export default async function Profile({ params }: { params: { id: string } }) {
   const clipsData = GetRecentClips();
   const [user, clips] = await Promise.all([userData, clipsData]);
 
-  if(!user) return <div>404</div>
+  if(!user) return (
+    <div>404</div>
+  )
 
   return (
     <div>
@@ -42,7 +42,7 @@ export default async function Profile({ params }: { params: { id: string } }) {
           <div className="mb-8">
             <div className="z-10 -translate-y-1/3">
               <Image
-                src={user.profileImageUrl || 'https://static-cdn.jtvnw.net/jtv_user_pictures/0f9f9f9f-0f9f-0f9f-0f9f-0f9f9f9f0f9f-profile_banner-480.png'}
+                src={user.profileImageUrl}
                 alt=""
                 width={128}
                 height={128}
