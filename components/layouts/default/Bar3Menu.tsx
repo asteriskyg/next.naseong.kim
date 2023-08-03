@@ -44,7 +44,7 @@ export default function MenuComponent({ me }: { me: IdentityType | undefined }) 
               button={{
                 name: '트위치로 로그인',
                 description: '로그인 하고 클립 만들기',
-                href: 'https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=0373yf8vzqpo4f9ln4ajqrq9fim3hd&redirect_uri=https://dev.next.naseong.kim/api/authorization&scope=clips%3Aedit%20user%3Aread%3Aemail%20user%3Aread%3Asubscriptions',
+                href: `https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=0373yf8vzqpo4f9ln4ajqrq9fim3hd&redirect_uri=${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/authorization&scope=clips%3Aedit%20user%3Aread%3Aemail%20user%3Aread%3Asubscriptions`,
                 icon: LockClosedIcon
               }}
             />

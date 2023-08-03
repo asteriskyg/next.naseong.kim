@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { StreamInfoType } from "type";
 
 async function GetStream() {
-  const res = await fetch(`${process.env.NEXT_APP_HOST}/api/twitch/stream`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/twitch/stream`)
 
   if (!res.ok) return undefined;
   return res.json() as Promise<StreamInfoType>;
