@@ -19,9 +19,12 @@ export default function DefaultFooter() {
   return (
     <footer className="bg-white border-t">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
-        <Link href="/" className="text-center font-bold leading-5 text-gray-500 hover:text-black transition-colors">
-          next.naseong.kim
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="text-center font-bold leading-5 text-gray-500 hover:text-black transition-colors">
+            next.naseong.kim
+          </Link>
+          <span className="text-gray-500">build {`#${process.env.VERCEL_GIT_COMMIT_SHA?.substring(0,7) || 'development'}`}</span>
+        </div>
         <div className="flex justify-center space-x-6">
           {navigation.map((item) => (
             <Link key={item.name} href={item.href} className="text-gray-400 hover:text-black transition-colors">
