@@ -4,29 +4,16 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import RecentClipLists from '@/components/RecentClipLists';
 import ProfileBackground from '@/components/ProfileBackground';
-import type { IdentityType, ClipListsType } from 'type';
+import { getUserDetail, getUserClips } from '@/services/users';
 dayjs.extend(relativeTime);
 
-async function GetRecentClips() {
-  const res = await fetch('https://dev.naseong.kim/api/clip/recent')
-
-  if (!res.ok) return undefined;
-  return res.json() as Promise<ClipListsType>;
-}
-
-async function GetUserData(id: string) {
-  const res = await fetch(`https://dev.naseong.kim/api/user/detail?id=${id}`, {
-    next: { revalidate: 0 }
-  }
-    )
-
-  if (!res.ok) return undefined;
-  return res.json() as Promise<IdentityType>;
-}
-
-export default async function Profile({ params }: { params: { id: string } }) {
-  const userData = GetUserData(params.id);
-  const clipsData = GetRecentClips();
+export default async function UserProfile({ params }: {
+  params: {
+    user: number,
+  },
+}) {
+  const userData = getUserDetail(params.user);
+  const clipsData = getUserClips(params.user, 0);
   const [user, clips] = await Promise.all([userData, clipsData]);
 
   if(!user) return (
