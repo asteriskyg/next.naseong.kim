@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt_decode from "jwt-decode";
-
-interface Token {
-  access: string;
-  refresh: string;
-}
+import { refreshIdentity } from "@/services/auth";
 
 interface JWT {
   exp: number;
@@ -18,17 +14,16 @@ export async function middleware(req: NextRequest) {
   const authorization = req.cookies.get('authorization');
   if(authorization) {
     const jwt = jwt_decode(authorization.value) as JWT;
-    if (jwt.exp * 1000 > Date.now()) return res;
+    if(jwt.exp * 1000 > Date.now()) return res;
   }
 
   const refresh = req.cookies.get('refresh');
-  if(!refresh) return res;
+  const token = await refreshIdentity(refresh?.value);
 
-  const token = await refreshIdentity(refresh.value);
-  if (!token) return res;
+  if(!token) return res;
 
-  res.cookies.set("authorization", token?.access, {
-    domain: 'next.naseong.kim',
+  res.cookies.set("authorization", token.access, {
+    domain: process.env.NEXT_PUBLIC_APP_URL,
     path: '/',
     httpOnly: true,
     secure: true,
@@ -36,8 +31,8 @@ export async function middleware(req: NextRequest) {
     maxAge: 1000 * 60 * 30,
   });
 
-  res.cookies.set("authorization", token?.refresh, {
-    domain: 'next.naseong.kim',
+  res.cookies.set("refresh", token.refresh, {
+    domain: process.env.NEXT_PUBLIC_APP_URL,
       path: '/',
       httpOnly: true,
       secure: true,
@@ -46,15 +41,4 @@ export async function middleware(req: NextRequest) {
   });
 
   return res;
-}
-
-async function refreshIdentity(token: String): Promise<Token | undefined> {
-  const res = await fetch('https://dev.naseong.kim/api/auth/refresh', {
-    headers: {
-      Cookie: `Refresh=${token}`,
-    }
-  });
-
-  if(!res.ok) return undefined;
-  return res.json();
 }
