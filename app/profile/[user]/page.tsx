@@ -1,11 +1,8 @@
 import Image from 'next/image';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import 'dayjs/locale/ko';
 import RecentClipLists from '@/components/RecentClipLists';
 import ProfileBackground from '@/components/ProfileBackground';
 import { getUserDetail, getUserClips } from '@/services/users';
-dayjs.extend(relativeTime);
+import { getTimeDiff } from '@/utils/date';
 
 export default async function UserProfile({ params }: {
   params: {
@@ -50,7 +47,7 @@ export default async function UserProfile({ params }: {
                   return (
                     <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-1 tracking-tight bg-red-100 px-3 py-2 text-sm sm:text-base font-medium text-red-600">
                       <span className='text-base sm:text-lg'>❤️</span> 
-                      <b>{ dayjs().diff(dayjs(user.follow), "M") }개월</b> 팔로우 중
+                      <b>{ getTimeDiff(undefined, user.follow, "M") }개월</b> 팔로우 중
                     </span>
                   )
                 })()}

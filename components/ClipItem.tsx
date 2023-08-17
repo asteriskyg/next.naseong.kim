@@ -1,12 +1,9 @@
+import { getTimeFromNow } from '@/utils/date';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Clip } from 'type';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import 'dayjs/locale/ko';
-dayjs.extend(relativeTime);
+import { ClipType } from 'type';
 
-export default function ClipItem({ clip }: { clip: Clip }) {
+export default function ClipItem({ clip }: { clip: ClipType }) {
   return (
     <Link
       href={`/detail/${clip.clipName}`}
@@ -43,7 +40,7 @@ export default function ClipItem({ clip }: { clip: Clip }) {
           { clip.creatorName }
         </div>
         <div style={{overflowWrap: 'anywhere'}}>
-          { dayjs().locale("ko").to(dayjs(clip.clipCreatedAt)) }
+          { getTimeFromNow(clip.clipCreatedAt) }
         </div>
       </div>
       </div>
