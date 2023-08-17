@@ -1,20 +1,9 @@
 import Link from "next/link";
-import type { StreamInfoType } from "type";
-
-async function GetStream() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/twitch/stream`)
-
-  if (!res.ok) return undefined;
-
-  const stream = await res.json()
-  if (stream.length === 0) return undefined;
-
-  return stream as Promise<StreamInfoType>;
-}
+import { getTwitchStream } from "@/services/stream";
 
 export default async function LiveBadge() {
-  const stream = await GetStream();
-  if (!stream) return undefined;
+  const stream = await getTwitchStream();
+  if(!stream) return undefined;
 
   return (
     <Link

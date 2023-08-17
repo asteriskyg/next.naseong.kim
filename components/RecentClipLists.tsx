@@ -2,14 +2,14 @@
 import { useState } from 'react';
 import axios from 'axios';
 import ClipItem from './ClipItem';
-import type { ClipListsType, Clip } from 'type';
+import type { ClipListsType, ClipType } from 'type';
 
 export const renderClips = (clips: ClipListsType | undefined) => {
   if(!clips) {
     return undefined;
   }
 
-  return clips.map((clip: Clip) => {
+  return clips.map((clip: ClipType) => {
     return (
       <ClipItem
         key={clip.contentId}
@@ -29,7 +29,7 @@ export default function RecentClipLists({ clipLists }: { clipLists: ClipListsTyp
     }
 
     const newClips = await axios
-    .get(`https://dev.naseong.kim/api/clip/recent?offset=${clipIndex}`)
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/clip/recent?offset=${clipIndex}`)
     .catch(function () {
       return undefined;
     });
@@ -59,4 +59,3 @@ export default function RecentClipLists({ clipLists }: { clipLists: ClipListsTyp
   )
 }
 
-  
