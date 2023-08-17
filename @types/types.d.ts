@@ -1,9 +1,9 @@
 declare module 'type' {
   export type StreamInfoType = {
-    data: Stream[]
+    data: StreamType[]
   };
 
-  export type Stream = {
+  export type StreamType = {
     id: number;
     user_id: number;
     user_login: string;
@@ -32,7 +32,7 @@ declare module 'type' {
     subscription: number | undefined;
   };
 
-  export type Clip = {
+  export type ClipType = {
     clipCreatedAt: Date;
     clipDuration: number;
     clipLastEdited: Date;
@@ -46,5 +46,5 @@ declare module 'type' {
     clipName: string;
   }
 
-  export type ClipListsType = Clip[];
+  export type ClipListsType = ClipType[];
 }
