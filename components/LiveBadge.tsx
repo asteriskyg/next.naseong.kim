@@ -3,7 +3,7 @@ import { getTwitchStream } from "@/services/stream";
 
 export default async function LiveBadge() {
   const stream = await getTwitchStream();
-  if(!stream) return undefined;
+  if(!stream || stream.data.length === 0) return undefined;
 
   return (
     <Link
