@@ -22,7 +22,7 @@ export const getUserClips = async (
 
   if(!user) return undefined;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clip/user?${user}&offset=${offset}`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clip/user?id=${user}&offset=${offset}`)
 
   if(!res.ok) return undefined;
   return res.json() as Promise<ClipListsType>;
