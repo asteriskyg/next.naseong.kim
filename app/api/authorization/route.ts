@@ -2,14 +2,23 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getServiceToken } from '@/services/auth';
 
-export async function GET(req: NextRequest) {
+const getParams = (
+  url: string | undefined,
+  key: string
+) => {
+  if(!url) return null;
+
+  const { searchParams } = new URL(url);
+  return searchParams.get(key);
+}
+
+export const GET = async(req: NextRequest) => {
   if(!process.env.NEXT_PUBLIC_APP_URL)
     throw new Error('NEXT_PUBLIC_APP_URL is not defined.');
 
-  const { searchParams } = new URL(req.url)
-  const code = searchParams.get('code');
-  
+  const code = getParams(req.url, 'code');
   const token = await getServiceToken(code);
+
   if(!token) return NextResponse
     .redirect(`${process.env.NEXT_PUBLIC_APP_URL}?error=invalid_request`);
 
