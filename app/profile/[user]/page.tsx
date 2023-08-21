@@ -41,7 +41,7 @@ export default async function UserProfile({ params }: {
                   #{ user.twitchUserId }
                 </span>
               </div>
-              <div className='flex gap-3 overflow-scroll'>
+              <div className='flex gap-3 overflow-auto'>
                 {(() => {
                   if(user.userType === 'broadcaster' || !user.follow) return undefined
                   return (
