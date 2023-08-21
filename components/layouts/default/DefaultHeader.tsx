@@ -1,12 +1,14 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
+
 import { getIdentity } from "@/services/auth";
-import Bar3Menu from "./Bar3Menu";
+
+import { Bar3Menu } from "./Bar3Menu";
 
 const LiveBadge = dynamic(() => import("@/components/LiveBadge"));
 
-export default async function DefaultHeader() {
+export const DefaultHeader = async() => {
   const token = cookies().get("authorization");
   const me = await getIdentity(token);
 

@@ -33,8 +33,8 @@ export const getClippedTimestamp = (
   const seconds = diff % 60;
 
   return {
-    hours: hours,
-    minutes: minutes,
-    seconds: seconds,
+    hours,
+    minutes,
+    seconds,
   }
 }

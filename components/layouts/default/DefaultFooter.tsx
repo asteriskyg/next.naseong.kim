@@ -15,7 +15,7 @@ const navigation = [{
   ),
 }]
 
-export default function DefaultFooter() {
+export const DefaultFooter = () => {
   return (
     <footer className="bg-white border-t">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">

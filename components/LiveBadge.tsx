@@ -1,7 +1,8 @@
 import Link from "next/link";
+
 import { getTwitchStream } from "@/services/stream";
 
-export default async function LiveBadge() {
+export const LiveBadge = async() => {
   const stream = await getTwitchStream();
   if(!stream || stream.data.length === 0) return undefined;
 

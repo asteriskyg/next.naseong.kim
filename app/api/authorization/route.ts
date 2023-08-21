@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+
 import { getServiceToken } from '@/services/auth';
 
 export async function GET(req: NextRequest) {

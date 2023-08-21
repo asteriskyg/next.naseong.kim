@@ -1,20 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt_decode from "jwt-decode";
+import jwtDecode, { JwtPayload } from "jwt-decode";
+
 import { refreshIdentity } from "@/services/auth";
 
-interface JWT {
-  exp: number;
-  iat: number;
-  sub: string;
-}
-
-export async function middleware(req: NextRequest) {
+export const middleware = async(req: NextRequest) => {
   const res = NextResponse.next();
 
   const authorization = req.cookies.get('authorization');
   if(authorization) {
-    const jwt = jwt_decode(authorization.value) as JWT;
-    if(jwt.exp * 1000 > Date.now()) return res;
+    const jwt = jwtDecode(authorization.value) as JwtPayload;
+    if(jwt?.exp && jwt.exp * 1000 > Date.now()) return res;
   }
 
   const refresh = req.cookies.get('refresh');

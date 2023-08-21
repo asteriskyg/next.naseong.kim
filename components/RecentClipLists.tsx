@@ -1,8 +1,11 @@
 'use client';
+
 import { useState } from 'react';
 import axios from 'axios';
-import ClipItem from './ClipItem';
+
 import type { ClipListsType, ClipType } from 'type';
+
+import { ClipItem } from './ClipItem';
 
 export const renderClips = (clips: ClipListsType | undefined) => {
   if(!clips) {
@@ -19,24 +22,26 @@ export const renderClips = (clips: ClipListsType | undefined) => {
   })
 }
 
-export default function RecentClipLists({ clipLists }: { clipLists: ClipListsType | undefined }) {
+export const RecentClipLists = ({ clipLists }: { clipLists: ClipListsType | undefined }) => {
   const [clips, setClips] = useState(clipLists);
   const [clipIndex, setClipIndex] = useState(1);
 
-  const loadMore = async () => {
+  const loadMore = async() => {
     if(!clips) {
       return undefined;
     }
 
     const newClips = await axios
     .get(`${process.env.NEXT_PUBLIC_API_URL}/clip/recent?offset=${clipIndex}`)
-    .catch(function () {
+    .catch(() => {
       return undefined;
     });
   
     setClipIndex(clipIndex + 1);
     setClips(clips.concat(newClips?.data));
     renderClips(clips);
+
+    return 1;
   }
 
   return(

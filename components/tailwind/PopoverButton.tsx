@@ -7,7 +7,7 @@ interface ButtonProps {
   icon: any;
 }
 
-export default function VerticalNavigation({ button }: { button: ButtonProps }) {
+export const PopoverButton = ({ button }: { button: ButtonProps }) => {
   return (
     <div className="group relative flex items-center gap-x-6 rounded-lg p-4 hover:bg-slate-100 transition-all duration-300">
       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg overflow-hidden bg-slate-100 group-hover:bg-white transition-all duration-300">

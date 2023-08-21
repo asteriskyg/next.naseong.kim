@@ -1,7 +1,8 @@
-import RecentClipLists from '@/components/RecentClipLists';
 import { getRecentClips } from '@/services/clips';
 
-export default async function Index() {
+import { RecentClipLists } from '@/components/RecentClipLists';
+
+export const Index = async() => {
   const clips = await getRecentClips();
 
   return (

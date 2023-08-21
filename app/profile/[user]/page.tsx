@@ -1,14 +1,16 @@
 import Image from 'next/image';
-import RecentClipLists from '@/components/RecentClipLists';
-import ProfileBackground from '@/components/ProfileBackground';
+
 import { getUserDetail, getUserClips } from '@/services/users';
 import { getTimeDiff } from '@/utils/date';
 
-export default async function UserProfile({ params }: {
+import { RecentClipLists } from '@/components/RecentClipLists';
+import { ProfileBackground } from '@/components/ProfileBackground';
+
+export const UserProfile = async({ params }: {
   params: {
     user: number,
   },
-}) {
+}) => {
   const userData = getUserDetail(params.user);
   const clipsData = getUserClips(params.user, 0);
   const [user, clips] = await Promise.all([userData, clipsData]);
@@ -58,8 +60,8 @@ export default async function UserProfile({ params }: {
                       <span className='text-base sm:text-lg'>💎</span>
                       <b>{(() => {
                         if(user.subscription === 1000) return '1'
-                        else if(user.subscription === 2000) return '2'
-                        else return '3'
+                        if(user.subscription === 2000) return '2'
+                        return '3'
                       })()}티어</b> 구독
                     </span>
                   )
@@ -70,8 +72,8 @@ export default async function UserProfile({ params }: {
                     <span className="shrink-0 rounded-xl bg-slate-100 px-3 py-2 text-sm sm:text-base font-medium text-slate-600">
                       {(() => {
                         if(user.userType === 'developer') return <span className='inline-flex items-center gap-x-1.5'><span className='text-base sm:text-lg'>🔧</span> 개발자</span>
-                        else if(user.userType === 'editor') return <span className='inline-flex items-center gap-x-1.5'><span className='text-base sm:text-lg'>🐼</span> 편집자</span>
-                        else return <span><span className='inline-flex items-center gap-x-1.5 text-base sm:text-lg'>🔧</span> 스트리머</span>
+                        if(user.userType === 'editor') return <span className='inline-flex items-center gap-x-1.5'><span className='text-base sm:text-lg'>🐼</span> 편집자</span>
+                        return <span><span className='inline-flex items-center gap-x-1.5 text-base sm:text-lg'>🔧</span> 스트리머</span>
                       })()}
                     </span>
                   )

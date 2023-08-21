@@ -1,15 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import RecentClipLists from "@/components/RecentClipLists";
+
 import { getUserDetail } from "@/services/users";
 import { getClipDetail, getRecentClips } from "@/services/clips";
 import { getFormattedDate, getTimeFromNow, getClippedTimestamp } from "@/utils/date";
 
-export default async function ClipDetail({ params }: {
+import { RecentClipLists } from "@/components/RecentClipLists";
+
+export const ClipDetail = async({ params }: {
   params: {
     clip: string,
   },
-}) {
+}) => {
   const clipData = getClipDetail(params.clip);
   const clipListsData = getRecentClips();
   const [clip, clipLists] = await Promise.all([clipData, clipListsData]);
@@ -25,6 +27,7 @@ export default async function ClipDetail({ params }: {
     <div className="mx-auto max-w-7xl sm:p-6 sm:pb-0">
       <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border md:rounded-2xl dark:border-neutral-600">
         <iframe
+          title={ clip.contentName }
           src={ `https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/iframe?preload=true&loop=true&poster=https%3A%2F%2Fcustomer-lsoi5zwkd51of53g.cloudflarestream.com%2F${clip.contentId}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600` }
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           className="border-0 absolute top-0 left-0 w-full h-full"

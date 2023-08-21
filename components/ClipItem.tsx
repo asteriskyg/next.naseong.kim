@@ -1,9 +1,11 @@
-import { getTimeFromNow } from '@/utils/date';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ClipType } from 'type';
 
-export default function ClipItem({ clip }: { clip: ClipType }) {
+import { getTimeFromNow } from '@/utils/date';
+
+
+export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
       href={`/detail/${clip.clipName}`}

@@ -1,13 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon, LockClosedIcon } from "@heroicons/react/24/outline";
+
 import type { IdentityType } from "type";
-import VerticalNavigation from "@/components/tailwind/Navigation/VerticalNavigation";
-import CustomIcon from "@/components/CustomIcon";
-import PopoverButton from "@/components/tailwind/PopoverButton";
+
+import { VerticalNavigation } from "@/components/tailwind/Navigation/VerticalNavigation";
+import { CustomIcon } from "@/components/CustomIcon";
+import { PopoverButton } from "@/components/tailwind/PopoverButton";
 
 const TwitchIcon = () => {
   return (
@@ -33,7 +36,7 @@ const lists = [
   },
 ];
 
-export default function MenuComponent({ me }: { me: IdentityType | undefined }) {
+export const Bar3Menu = ({ me }: { me: IdentityType | undefined }) => {
   if(!me) {
     return (
       <Popover className="relative flex flex-col">

@@ -1,7 +1,8 @@
-import { getTwitchAccessToken } from "./auth";
 import type { StreamInfoType } from "type";
 
-export const getTwitchStream = async () => {
+import { getTwitchAccessToken } from "./auth";
+
+export const getTwitchStream = async() => {
   if(!process.env.TWITCH_BROADCASTER_ID)
     throw new Error('TWITCH_BROADCASTER_ID is not defined.');
 

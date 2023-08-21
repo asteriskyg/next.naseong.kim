@@ -17,7 +17,7 @@ export const getServiceToken = async (code: string | null) => {
 }
 
 // @TODO: Type 제대로 선언
-export const getTwitchAccessToken = async () => {
+export const getTwitchAccessToken = async() => {
   if(!process.env.TWITCH_CLIENT_ID)
     throw new Error('TWITCH_CLIENT_ID is not defined.');
 
