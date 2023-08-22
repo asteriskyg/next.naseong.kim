@@ -1,15 +1,9 @@
-import RecentClipLists from '@/components/RecentClipLists';
-import type { ClipListsType } from 'type';
+import { getRecentClips } from "@/services/clips";
 
-async function GetRecentClips() {
-  const res = await fetch('https://dev.naseong.kim/api/clip/recent')
-
-  if (!res.ok) return undefined;
-  return res.json() as Promise<ClipListsType>;
-}
+import { RecentClipLists } from "@/components/RecentClipLists";
 
 export default async function Index() {
-  const clips = await GetRecentClips();
+  const clips = await getRecentClips();
 
   return (
     <div className="py-10">
@@ -20,5 +14,5 @@ export default async function Index() {
         <RecentClipLists clipLists={clips} />
       </div>
     </div>
-  )
+  );
 }

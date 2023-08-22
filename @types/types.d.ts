@@ -1,9 +1,34 @@
-declare module 'type' {
-  export type StreamInfoType = {
-    data: Stream[]
+declare module "type" {
+  export type TwitchClientCredentialsType = {
+    access_token: string;
+    expires_in: number;
+    token_type: "bearer";
   };
 
-  export type Stream = {
+  export type IdentityType = {
+    displayName: string;
+    email: string;
+    profileImageUrl: string;
+    profileBackgroundUrl?: string;
+    twitchUserId: number;
+    userType: "broadcaster" | "editor" | "developer" | "viewer";
+    follow?: Date;
+    subscription?: number;
+    registeredAt: Date;
+  };
+
+  export type UserType = {
+    displayName: string;
+    profileImageUrl: string;
+    profileBackgroundUrl?: string;
+    twitchUserId: number;
+    userType: "broadcaster" | "editor" | "developer" | "viewer";
+    follow?: Date;
+    subscription?: number;
+    registeredAt: Date;
+  };
+
+  export type StreamType = {
     id: number;
     user_id: number;
     user_login: string;
@@ -21,18 +46,11 @@ declare module 'type' {
     is_mature: boolean;
   };
 
-  export type IdentityType = {
-    displayName: string;
-    email: string;
-    profileImageUrl: string;
-    profileBackgroundUrl: string | undefined;
-    twitchUserId: number;
-    userType: string;
-    follow: Date | undefined;
-    subscription: number | undefined;
+  export type StreamInfoType = {
+    data: StreamType[];
   };
 
-  export type Clip = {
+  export type ClipType = {
     clipCreatedAt: Date;
     clipDuration: number;
     clipLastEdited: Date;
@@ -44,7 +62,7 @@ declare module 'type' {
     gameName: string;
     streamStartedAt: Date;
     clipName: string;
-  }
+  };
 
-  export type ClipListsType = Clip[];
+  export type ClipListsType = ClipType[];
 }

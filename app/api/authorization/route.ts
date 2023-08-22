@@ -1,33 +1,41 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-  if (!process.env.NEXT_PUBLIC_APP_HOST) return NextResponse.json({ error: 'NEXT_PUBLIC_APP_HOST is not defined.' })
-  if (!searchParams.get('code')) return NextResponse.json({ error: 'Cannot find authorization code.' })
+import { getServiceToken } from "@/services/auth";
 
-  const tokenResponse = await fetch(`https://dev.naseong.kim/api/auth/login?code=${searchParams.get('code')}`)
-  if(!tokenResponse.ok) return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}`);
+const getParams = (url: string | undefined, key: string) => {
+  if (!url) return null;
 
-  const token = await tokenResponse.json();
-  const res = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}`);
+  const { searchParams } = new URL(url);
+  return searchParams.get(key);
+};
 
-  res.cookies.set('authorization', token.access, {
-    domain: 'next.naseong.kim',
-    path: '/',
+export const GET = async (req: NextRequest) => {
+  if (!process.env.NEXT_PUBLIC_APP_URL) throw new Error("NEXT_PUBLIC_APP_URL is not defined.");
+
+  const code = getParams(req.url, "code");
+  const token = await getServiceToken(code);
+
+  if (!token) return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}?error=invalid_request`);
+
+  const res = NextResponse.redirect(process.env.NEXT_PUBLIC_APP_URL);
+
+  res.cookies.set("authorization", token.access, {
+    domain: process.env.NEXT_PUBLIC_APP_URL,
+    path: "/",
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
-    maxAge: 1000 * 60 * 30,
+    sameSite: "strict",
+    maxAge: 1000 * 60 * 30, // 30분
   });
 
-  res.cookies.set('refresh', token.refresh, {
-    domain: 'next.naseong.kim',
-    path: '/',
+  res.cookies.set("refresh", token.refresh, {
+    domain: process.env.NEXT_PUBLIC_APP_URL,
+    path: "/",
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
-    maxAge: 1000 * 60 * 60 * 24 * 7 * 2,
+    sameSite: "strict",
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 2, // 14일
   });
 
   return res;
-}
+};
