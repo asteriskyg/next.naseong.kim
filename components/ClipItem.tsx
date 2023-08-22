@@ -16,7 +16,7 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
       href={`/detail/${clip.clipName}`}
-      className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white hover:bg-stone-100 hover:shadow-lg border transition-all">
+      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-lg bg-white hover:bg-stone-100 hover:shadow-lg border transition-all">
       <div className="relative bg-slate-100 dark:bg-neutral-800">
         <Image
           src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
