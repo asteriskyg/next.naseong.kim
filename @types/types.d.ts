@@ -1,4 +1,10 @@
 declare module "type" {
+  export type TwitchClientCredentialsType = {
+    access_token: string;
+    expires_in: number;
+    token_type: "bearer";
+  };
+
   export type IdentityType = {
     displayName: string;
     email: string;

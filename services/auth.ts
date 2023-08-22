@@ -1,5 +1,5 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { IdentityType } from "type";
+import { IdentityType, TwitchClientCredentialsType } from "type";
 
 export const getServiceToken = async (code: string | null) => {
   if (!process.env.NEXT_PUBLIC_API_URL) throw new Error("NEXT_PUBLIC_API_URL is not defined.");
@@ -15,7 +15,6 @@ export const getServiceToken = async (code: string | null) => {
   }>;
 };
 
-// @TODO: Type 제대로 선언
 export const getTwitchAccessToken = async () => {
   if (!process.env.TWITCH_CLIENT_ID) throw new Error("TWITCH_CLIENT_ID is not defined.");
 
@@ -30,9 +29,7 @@ export const getTwitchAccessToken = async () => {
   );
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<{
-    access_token: string;
-  }>;
+  return res.json() as Promise<TwitchClientCredentialsType>;
 };
 
 export const getIdentity = async (token?: RequestCookie) => {
@@ -50,7 +47,7 @@ export const getIdentity = async (token?: RequestCookie) => {
   return res.json() as Promise<IdentityType>;
 };
 
-export const refreshIdentity = async (token: string | undefined) => {
+export const refreshIdentity = async (token?: string) => {
   if (!process.env.NEXT_PUBLIC_API_URL) throw new Error("NEXT_PUBLIC_API_URL is not defined.");
 
   if (!token) return undefined;
