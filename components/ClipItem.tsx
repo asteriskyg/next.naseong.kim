@@ -4,6 +4,14 @@ import { ClipType } from "type";
 
 import { getTimeFromNow } from "@/utils/date";
 
+const parseClipDuration = (duration: number) => {
+  if (duration > 59) {
+    return duration - 60 < 10 ? `1:0${duration - 60}` : `1:${duration - 60}`;
+  }
+
+  return duration < 10 ? `0:0${duration}` : `0:${duration}`;
+};
+
 export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
@@ -17,13 +25,7 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
           height={360}
         />
         <span className="absolute bottom-1 right-1 inline-flex items-center rounded-lg bg-gray-50/90 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-          {clip.clipDuration > 59
-            ? clip.clipDuration - 60 < 10
-              ? `1:0${clip.clipDuration - 60}`
-              : `1:${clip.clipDuration - 60}`
-            : clip.clipDuration < 10
-            ? `0:0${clip.clipDuration}`
-            : `0:${clip.clipDuration}`}
+          {parseClipDuration(clip.clipDuration)}
         </span>
       </div>
       <div className="px-4 py-4 sm:px-6">
