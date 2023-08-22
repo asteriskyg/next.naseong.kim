@@ -1,10 +1,61 @@
 import Image from "next/image";
+import { UserType } from "type";
 
 import { getUserDetail, getUserClips } from "@/services/users";
 import { getTimeDiff } from "@/utils/date";
 
 import { RecentClipLists } from "@/components/RecentClipLists";
 import { ProfileBackground } from "@/components/ProfileBackground";
+
+const followDuration = (type: UserType["userType"], follow: UserType["follow"]) => {
+  if (type === "broadcaster" || !follow) return undefined;
+
+  return (
+    <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-1 tracking-tight bg-red-100 px-3 py-2 text-sm sm:text-base font-medium text-red-600">
+      <span className="text-base sm:text-lg">♥️</span>
+      <b>{getTimeDiff(undefined, follow, "M")}개월</b> 팔로우 중
+    </span>
+  );
+};
+
+const subscriptionTier = (type: UserType["userType"], subscription: UserType["subscription"]) => {
+  if (type === "broadcaster" || !subscription) return undefined;
+
+  const tier = subscription / 1000;
+  return (
+    <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-2 tracking-tight bg-blue-100 px-3 py-2 text-sm sm:text-base font-medium text-blue-600">
+      <span className="text-base sm:text-lg">💎</span>
+      <b>{tier}티어</b> 구독
+    </span>
+  );
+};
+
+const userType = (type: UserType["userType"]) => {
+  if (type === "viewer") return undefined;
+
+  const badgeConfig = {
+    developer: {
+      emoji: "🔧",
+      text: "개발자",
+    },
+    editor: {
+      emoji: "🐼",
+      text: "편집자",
+    },
+    broadcaster: {
+      emoji: "📺",
+      text: "스트리머",
+    },
+  };
+
+  return (
+    <span className="shrink-0 rounded-xl bg-slate-100 px-3 py-2 text-sm sm:text-base font-medium text-slate-600">
+      <span className="inline-flex items-center gap-x-1.5">
+        <span className="text-base sm:text-lg">{badgeConfig[type].emoji}</span> {badgeConfig[type].text}
+      </span>
+    </span>
+  );
+};
 
 export default async function UserProfile({
   params,
@@ -40,58 +91,9 @@ export default async function UserProfile({
                 <span className="shrink-0 text-gray-400 text-sm ml-2">#{user.twitchUserId}</span>
               </div>
               <div className="flex gap-3 overflow-auto">
-                {(() => {
-                  if (user.userType === "broadcaster" || !user.follow) return undefined;
-                  return (
-                    <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-1 tracking-tight bg-red-100 px-3 py-2 text-sm sm:text-base font-medium text-red-600">
-                      <span className="text-base sm:text-lg">❤️</span>
-                      <b>{getTimeDiff(undefined, user.follow, "M")}개월</b> 팔로우 중
-                    </span>
-                  );
-                })()}
-                {(() => {
-                  if (user.userType === "broadcaster" || !user.subscription) return undefined;
-                  return (
-                    <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-2 tracking-tight bg-blue-100 px-3 py-2 text-sm sm:text-base font-medium text-blue-600">
-                      <span className="text-base sm:text-lg">💎</span>
-                      <b>
-                        {(() => {
-                          if (user.subscription === 1000) return "1";
-                          if (user.subscription === 2000) return "2";
-                          return "3";
-                        })()}
-                        티어
-                      </b>{" "}
-                      구독
-                    </span>
-                  );
-                })()}
-                {(() => {
-                  if (user.userType === "viewer") return undefined;
-                  return (
-                    <span className="shrink-0 rounded-xl bg-slate-100 px-3 py-2 text-sm sm:text-base font-medium text-slate-600">
-                      {(() => {
-                        if (user.userType === "developer")
-                          return (
-                            <span className="inline-flex items-center gap-x-1.5">
-                              <span className="text-base sm:text-lg">🔧</span> 개발자
-                            </span>
-                          );
-                        if (user.userType === "editor")
-                          return (
-                            <span className="inline-flex items-center gap-x-1.5">
-                              <span className="text-base sm:text-lg">🐼</span> 편집자
-                            </span>
-                          );
-                        return (
-                          <span>
-                            <span className="inline-flex items-center gap-x-1.5 text-base sm:text-lg">🔧</span> 스트리머
-                          </span>
-                        );
-                      })()}
-                    </span>
-                  );
-                })()}
+                {followDuration(user.userType, user.follow)}
+                {subscriptionTier(user.userType, user.subscription)}
+                {userType(user.userType)}
               </div>
             </div>
           </div>
