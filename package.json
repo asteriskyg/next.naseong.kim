@@ -53,5 +53,6 @@
     "tailwindcss": "^3.3.3"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "next.naseong.kim@0.1.0"
+  "_id": "next.naseong.kim@0.1.0",
+  "packageManager": "yarn@4.0.0-rc.49"
 }
