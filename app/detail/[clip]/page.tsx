@@ -78,3 +78,5 @@ export const ClipDetail = async ({
     </div>
   );
 };
+
+export default ClipDetail;

@@ -111,3 +111,5 @@ export const UserProfile = async ({
     </div>
   );
 };
+
+export default UserProfile;
