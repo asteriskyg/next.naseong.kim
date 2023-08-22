@@ -7,7 +7,7 @@ import type { ClipListsType, ClipType } from "type";
 
 import { ClipItem } from "./ClipItem";
 
-export const renderClips = (clips: ClipListsType | undefined) => {
+export const renderClips = (clips?: ClipListsType) => {
   if (!clips) {
     return undefined;
   }
@@ -17,7 +17,7 @@ export const renderClips = (clips: ClipListsType | undefined) => {
   });
 };
 
-export const RecentClipLists = ({ clipLists }: { clipLists: ClipListsType | undefined }) => {
+export const RecentClipLists = ({ clipLists }: { clipLists?: ClipListsType }) => {
   const [clips, setClips] = useState(clipLists);
   const [clipIndex, setClipIndex] = useState(1);
 

@@ -36,7 +36,7 @@ const lists = [
   },
 ];
 
-export const Bar3Menu = ({ me }: { me: IdentityType | undefined }) => {
+export const Bar3Menu = ({ me }: { me?: IdentityType }) => {
   if (!me) {
     return (
       <Popover className="relative flex flex-col">
