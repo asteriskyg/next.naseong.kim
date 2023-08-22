@@ -1,4 +1,4 @@
-import { PopoverButton } from '../PopoverButton'
+import { PopoverButton } from "../PopoverButton";
 
 interface ItemsProps {
   name: string;
@@ -14,5 +14,5 @@ export const VerticalNavigation = ({ items }: { items: ItemsProps[] }) => {
         <PopoverButton key={item.name} button={item} />
       ))}
     </div>
-  )
-}
+  );
+};

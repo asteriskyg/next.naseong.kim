@@ -37,7 +37,7 @@ const lists = [
 ];
 
 export const Bar3Menu = ({ me }: { me: IdentityType | undefined }) => {
-  if(!me) {
+  if (!me) {
     return (
       <Popover className="relative flex flex-col">
         <Popover.Button className="gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -118,4 +118,4 @@ export const Bar3Menu = ({ me }: { me: IdentityType | undefined }) => {
       </Transition>
     </Popover>
   );
-}
+};
