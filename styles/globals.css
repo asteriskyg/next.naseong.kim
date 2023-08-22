@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '../public/fonts/SUIT/SUIT.css';
-@import '../public/fonts/SUITE/SUITE.css';
-@import '../public/fonts/tossface1.5/tossface.css';
+@import "../public/fonts/SUIT/SUIT.css";
+@import "../public/fonts/SUITE/SUITE.css";
+@import "../public/fonts/tossface1.5/tossface.css";
 
 body {
-    font-family: 'SUIT', 'Tossface', sans-serif;
+  font-family: "SUIT", "Tossface", sans-serif;
 }
 
 .suite {
-    font-family: 'SUITE', 'Tossface', sans-serif;
+  font-family: "SUITE", "Tossface", sans-serif;
 }

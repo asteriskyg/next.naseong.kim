@@ -1,6 +1,13 @@
-declare module 'type' {
-  export type StreamInfoType = {
-    data: StreamType[]
+declare module "type" {
+  export type IdentityType = {
+    displayName: string;
+    email: string;
+    profileImageUrl: string;
+    profileBackgroundUrl: string | undefined;
+    twitchUserId: number;
+    userType: string;
+    follow: Date | undefined;
+    subscription: number | undefined;
   };
 
   export type StreamType = {
@@ -21,15 +28,8 @@ declare module 'type' {
     is_mature: boolean;
   };
 
-  export type IdentityType = {
-    displayName: string;
-    email: string;
-    profileImageUrl: string;
-    profileBackgroundUrl: string | undefined;
-    twitchUserId: number;
-    userType: string;
-    follow: Date | undefined;
-    subscription: number | undefined;
+  export type StreamInfoType = {
+    data: StreamType[];
   };
 
   export type ClipType = {
@@ -44,7 +44,7 @@ declare module 'type' {
     gameName: string;
     streamStartedAt: Date;
     clipName: string;
-  }
+  };
 
   export type ClipListsType = ClipType[];
 }
