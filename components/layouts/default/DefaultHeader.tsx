@@ -6,9 +6,9 @@ import { getIdentity } from "@/services/auth";
 
 import { Bar3Menu } from "./Bar3Menu";
 
-const LiveBadge = dynamic(() => import("@/components/LiveBadge"));
+const LiveBadge = dynamic(() => import("@/components/LiveBadge").then((mod) => mod.LiveBadge));
 
-export const DefaultHeader = async() => {
+export const DefaultHeader = async () => {
   const token = cookies().get("authorization");
   const me = await getIdentity(token);
 
@@ -28,4 +28,4 @@ export const DefaultHeader = async() => {
       </nav>
     </header>
   );
-}
+};
