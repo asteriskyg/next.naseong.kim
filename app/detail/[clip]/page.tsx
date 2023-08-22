@@ -36,16 +36,20 @@ export default async function ClipDetail({
           allowFullScreen
         />
       </div>
-      <div className="flex flex-col items-start justify-between gap-6 p-6 pb-3 sm:px-0 md:flex-row text-black dark:text-slate-200">
-        <div className="text-xl line-clamp-1 sm:text-2xl">{clip.contentName}</div>
-        <div className="mb-3">{clip.gameName}</div>
+      <div className="flex flex-col items-start justify-between p-6 pb-3 sm:px-0 text-black dark:text-slate-200">
         <div>
-          <span className="text-gray-400">방송일자: </span>
-          {streamDate} ({timeFromNow})
+          <div className="text-xl line-clamp-1 sm:text-2xl">{clip.contentName}</div>
+          <div className="mb-3">{clip.gameName}</div>
         </div>
         <div>
-          <span className="text-gray-400">타임스탬프: </span>
-          {timestamp.hours}시간 {timestamp.minutes}분 {timestamp.seconds}초
+          <div>
+            <span className="text-gray-400">방송일자: </span>
+            {streamDate} ({timeFromNow})
+          </div>
+          <div>
+            <span className="text-gray-400">타임스탬프: </span>
+            {timestamp.hours}시간 {timestamp.minutes}분 {timestamp.seconds}초
+          </div>
         </div>
       </div>
       <div className="flex px-6 sm:px-0 mb-6">
