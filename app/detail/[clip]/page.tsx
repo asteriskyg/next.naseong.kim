@@ -7,13 +7,13 @@ import { getFormattedDate, getTimeFromNow, getClippedTimestamp } from "@/utils/d
 
 import { RecentClipLists } from "@/components/RecentClipLists";
 
-export const ClipDetail = async ({
+export default async function ClipDetail({
   params,
 }: {
   params: {
     clip: string;
   };
-}) => {
+}) {
   const clipData = getClipDetail(params.clip);
   const clipListsData = getRecentClips();
   const [clip, clipLists] = await Promise.all([clipData, clipListsData]);
@@ -77,4 +77,4 @@ export const ClipDetail = async ({
       </div>
     </div>
   );
-};
+}
