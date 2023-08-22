@@ -3,11 +3,23 @@ declare module "type" {
     displayName: string;
     email: string;
     profileImageUrl: string;
-    profileBackgroundUrl: string | undefined;
+    profileBackgroundUrl?: string;
     twitchUserId: number;
-    userType: string;
-    follow: Date | undefined;
-    subscription: number | undefined;
+    userType: "broadcaster" | "editor" | "developer" | "viewer";
+    follow?: Date;
+    subscription?: number;
+    registeredAt: Date;
+  };
+
+  export type UserType = {
+    displayName: string;
+    profileImageUrl: string;
+    profileBackgroundUrl?: string;
+    twitchUserId: number;
+    userType: "broadcaster" | "editor" | "developer" | "viewer";
+    follow?: Date;
+    subscription?: number;
+    registeredAt: Date;
   };
 
   export type StreamType = {
