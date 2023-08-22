@@ -2,7 +2,7 @@ import { getRecentClips } from "@/services/clips";
 
 import { RecentClipLists } from "@/components/RecentClipLists";
 
-export const Index = async () => {
+export default async function Index() {
   const clips = await getRecentClips();
 
   return (
@@ -15,6 +15,4 @@ export const Index = async () => {
       </div>
     </div>
   );
-};
-
-export default Index;
+}

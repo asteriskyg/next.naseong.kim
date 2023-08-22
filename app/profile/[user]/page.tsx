@@ -6,13 +6,13 @@ import { getTimeDiff } from "@/utils/date";
 import { RecentClipLists } from "@/components/RecentClipLists";
 import { ProfileBackground } from "@/components/ProfileBackground";
 
-export const UserProfile = async ({
+export default async function UserProfile({
   params,
 }: {
   params: {
     user: number;
   };
-}) => {
+}) {
   const userData = getUserDetail(params.user);
   const clipsData = getUserClips(params.user, 0);
   const [user, clips] = await Promise.all([userData, clipsData]);
@@ -110,6 +110,4 @@ export const UserProfile = async ({
       </div>
     </div>
   );
-};
-
-export default UserProfile;
+}
