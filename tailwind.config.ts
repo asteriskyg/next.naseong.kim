@@ -6,7 +6,12 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'twitch-dark': '#18181b',
+        'twitch-purple': '#9146ff',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
