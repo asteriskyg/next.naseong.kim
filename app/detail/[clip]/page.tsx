@@ -27,7 +27,7 @@ export default async function ClipDetail({
 
   return (
     <div className="mx-auto max-w-7xl sm:p-6 sm:pb-0">
-      <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border md:rounded-2xl dark:border-neutral-600">
+      <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border dark:border-neutral-600">
         <iframe
           title={clip.contentName}
           src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/iframe?preload=true&loop=true&poster=https%3A%2F%2Fcustomer-lsoi5zwkd51of53g.cloudflarestream.com%2F${clip.contentId}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
@@ -71,10 +71,10 @@ export default async function ClipDetail({
       <div className="mx-auto max-w-7xl py-8 px-6 sm:px-0">
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center" aria-hidden="true">
-            <div className="w-full border-t border-gray-300" />
+            <div className="w-full border-t dark:border-neutral-600" />
           </div>
           <div className="relative flex justify-start">
-            <span className="bg-white pr-3 text-xl font-semibold leading-6 text-gray-900">다른 클립 더 보기</span>
+            <span className="bg-white dark:bg-twitch-dark pr-3 text-xl font-semibold leading-6 text-gray-900 dark:text-slate-200">다른 클립 더 보기</span>
           </div>
         </div>
         <RecentClipLists clipLists={clipLists} />
