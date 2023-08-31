@@ -14,7 +14,7 @@ import { PopoverButton } from "@/components/tailwind/PopoverButton";
 
 const TwitchIcon = () => {
   return (
-    <CustomIcon className="w-6 h-6 text-gray-600 group-hover:text-indigo-600">
+    <CustomIcon className="w-6 h-6 text-gray-600 dark:text-slate-200 group-hover:text-indigo-400">
       <path
         d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"
         clipRule="evenodd"
@@ -52,7 +52,7 @@ export const Bar3Menu = ({ me }: { me?: IdentityType }) => {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1">
           <Popover.Panel className="absolute right-0 mt-10 w-screen max-w-sm">
-            <div className="w-full overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            <div className="w-full overflow-hidden rounded-3xl bg-white dark:bg-twitch-dark text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
               <div className="p-4 border-b">
                 <PopoverButton
                   button={{
@@ -99,8 +99,8 @@ export const Bar3Menu = ({ me }: { me?: IdentityType }) => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1">
         <Popover.Panel className="absolute right-0 mt-10 w-screen max-w-sm">
-          <div className="w-full overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-            <div className="p-4 border-b">
+          <div className="w-full overflow-hidden rounded-3xl bg-white dark:bg-neutral-800 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            <div className="p-4 border-b dark:border-neutral-600">
               <PopoverButton
                 button={{
                   name: me.displayName,

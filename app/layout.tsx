@@ -9,7 +9,7 @@ import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
 export const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ko">
-      <body>
+      <body className="bg-white dark:bg-twitch-dark">
         <DefaultHeader />
         <main>{children}</main>
         <DefaultFooter />
