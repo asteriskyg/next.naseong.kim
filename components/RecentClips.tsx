@@ -18,6 +18,7 @@ export const RecentClips = ({
   const [clips, setClips] = useState(initialClips);
   const [offset, setOffset] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [listEnd, setListEnd] = useState(false);
 
   const loadMore = async () => {
     if (loading) return undefined;
@@ -29,6 +30,7 @@ export const RecentClips = ({
     else newClips = await getRecentClips(offset);
 
     if (!clips || !newClips) return undefined;
+    if (newClips.length < 12) setListEnd(true);
 
     setOffset(offset + 1);
     setClips(clips.concat(newClips));
@@ -52,7 +54,7 @@ export const RecentClips = ({
         )}
       </div>
       <div className="mt-6 flex w-full items-center justify-center">
-        {clips && clips.length % 12 !== 0 ? (
+        {clips && listEnd ? (
           <span className="py-4 px-6 bg-slate-100 dark:bg-neutral-800 rounded-3xl dark:text-slate-200">
             🎉 모든 클립을 확인했어요. 🎉
           </span>
