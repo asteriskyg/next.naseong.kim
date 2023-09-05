@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -38,5 +38,6 @@
     "tailwindcss": "^3.3.3"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "next.naseong.kim@0.1.0"
+  "_id": "next.naseong.kim@0.1.0",
+  "packageManager": "yarn@3.6.3"
 }
