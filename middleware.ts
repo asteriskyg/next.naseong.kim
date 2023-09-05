@@ -18,21 +18,21 @@ export const middleware = async (req: NextRequest) => {
   if (!token) return res;
 
   res.cookies.set("authorization", token.access, {
-    domain: process.env.NEXT_PUBLIC_APP_URL,
+    domain: process.env.NEXT_PUBLIC_APP_HOST,
     path: "/",
     httpOnly: true,
     secure: true,
     sameSite: "strict",
-    maxAge: 1000 * 60 * 30,
+    maxAge: 60 * 30,
   });
 
   res.cookies.set("refresh", token.refresh, {
-    domain: process.env.NEXT_PUBLIC_APP_URL,
+    domain: process.env.NEXT_PUBLIC_APP_HOST,
     path: "/",
     httpOnly: true,
     secure: true,
     sameSite: "strict",
-    maxAge: 1000 * 60 * 60 * 24 * 7 * 2,
+    maxAge: 60 * 60 * 24 * 7 * 2,
   });
 
   return res;
