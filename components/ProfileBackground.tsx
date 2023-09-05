@@ -11,25 +11,25 @@ const BackgrounPattern = {
 };
 
 export const ProfileBackground = ({ user }: { user?: UserType }) => {
-  const [scrollY, setScrollY] = useState(0);
+  const [scrollDepth, setScrollDepth] = useState(0);
 
-  function log() {
-    setScrollY(window.scrollY);
-  }
+  const updateScrollDepth = () => {
+    setScrollDepth(window.scrollY);
+  };
 
   useEffect(() => {
-    function watchScroll() {
-      window.addEventListener("scroll", log);
-    }
+    const watchScroll = () => {
+      window.addEventListener("scroll", updateScrollDepth);
+    };
     watchScroll();
 
     return () => {
-      window.removeEventListener("scroll", log);
+      window.removeEventListener("scroll", updateScrollDepth);
     };
   }, []);
 
   const translateY = {
-    transform: `translateY(${scrollY * 0.5}px)`,
+    transform: `translateY(${scrollDepth * 0.5}px)`,
   };
 
   if (!user?.profileBackgroundUrl)
