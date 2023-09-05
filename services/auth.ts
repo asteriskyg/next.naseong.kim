@@ -16,12 +16,12 @@ export const getServiceToken = async (code: string | null) => {
 };
 
 export const getTwitchAccessToken = async () => {
-  if (!process.env.TWITCH_CLIENT_ID) throw new Error("TWITCH_CLIENT_ID is not defined.");
+  if (!process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID) throw new Error("TWITCH_CLIENT_ID is not defined.");
 
   if (!process.env.TWITCH_CLIENT_SECRET) throw new Error("TWITCH_CLIENT_SECRET is not defined.");
 
   const res = await fetch(
-    `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
+    `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
     {
       next: { revalidate: 5000000 },
       method: "POST",

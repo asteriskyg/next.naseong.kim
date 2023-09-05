@@ -22,16 +22,23 @@ export const DefaultFooter = () => {
     <footer className="border-t bg-slate-50 text-black dark:border-neutral-600 dark:bg-twitch-dark dark:text-slate-200">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-center font-bold leading-5 text-gray-500 transition-colors hover:text-black">
+          <Link
+            href="/"
+            className="text-center font-bold leading-5 text-gray-500 transition-colors hover:text-black dark:hover:text-slate-200">
             next.naseong.kim
           </Link>
           <span className="text-gray-500">
-            build #{process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || "development"}
+            {process.env.VERCEL_GIT_COMMIT_SHA
+              ? `build#${process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7)}`
+              : undefined}
           </span>
         </div>
         <div className="flex justify-center space-x-6">
           {navigation.map((item) => (
-            <Link key={item.name} href={item.href} className="text-gray-400 transition-colors hover:text-twitch-dark dark:hover:text-slate-200">
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-gray-400 transition-colors hover:text-twitch-dark dark:hover:text-slate-200">
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
             </Link>

@@ -16,10 +16,10 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
       href={`/detail/${clip.clipName}`}
-      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-lg border bg-white transition-all hover:bg-slate-100 hover:shadow-lg dark:divide-neutral-600 dark:border-neutral-600 dark:bg-twitch-dark hover:dark:bg-neutral-800">
+      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-xl border bg-white transition-all hover:bg-slate-100 hover:shadow-lg dark:divide-neutral-600 dark:border-neutral-600 dark:bg-twitch-dark hover:dark:bg-neutral-800">
       <div className="relative bg-slate-100 dark:bg-neutral-800">
         <Image
-          src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
+          src={`https://customer-${process.env.NEXT_PUBLIC_STREAM_CODE}.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
           alt=""
           width={640}
           height={360}

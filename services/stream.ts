@@ -5,7 +5,7 @@ import { getTwitchAccessToken } from "./auth";
 export const getTwitchStream = async () => {
   if (!process.env.TWITCH_BROADCASTER_ID) throw new Error("TWITCH_BROADCASTER_ID is not defined.");
 
-  if (!process.env.TWITCH_CLIENT_ID) throw new Error("TWITCH_CLIENT_ID is not defined.");
+  if (!process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID) throw new Error("TWITCH_CLIENT_ID is not defined.");
 
   const token = await getTwitchAccessToken();
   if (!token) return undefined;
@@ -14,7 +14,7 @@ export const getTwitchStream = async () => {
     next: { revalidate: 300 },
     headers: {
       Authorization: `Bearer ${token.access_token}`,
-      "Client-Id": process.env.TWITCH_CLIENT_ID,
+      "Client-Id": process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID,
     },
   });
 
