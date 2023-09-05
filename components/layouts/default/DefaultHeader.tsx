@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { getIdentity } from "@/services/auth";
 
-import { Bar3Menu } from "./Bar3Menu";
+import { ProfileMenu } from "./ProfileMenu";
 
 const LiveBadge = dynamic(() => import("@/components/LiveBadge").then((mod) => mod.LiveBadge));
 
@@ -24,7 +24,7 @@ export const DefaultHeader = async () => {
           </Link>
           <LiveBadge />
         </div>
-        <Bar3Menu me={me} />
+        <ProfileMenu user={me} />
       </nav>
     </header>
   );
