@@ -4,7 +4,7 @@ import { UserType } from "type";
 import { getUserDetail, getUserClips } from "@/services/users";
 import { getTimeDiff } from "@/utils/date";
 
-import { RecentClipLists } from "@/components/RecentClipLists";
+import { RecentClips } from "@/components/RecentClips";
 import { ProfileBackground } from "@/components/ProfileBackground";
 
 const followDuration = (type: UserType["userType"], follow: UserType["follow"]) => {
@@ -107,7 +107,7 @@ export default async function UserProfile({
               </span>
             </div>
           </div>
-          <RecentClipLists clipLists={clips} />
+          <RecentClips initialClips={clips} user={user.twitchUserId} />
         </div>
       </div>
     </div>

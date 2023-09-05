@@ -8,7 +8,7 @@ import { getUserClips } from "@/services/users";
 
 import { ClipItem } from "./ClipItem";
 
-export const RecentClipLists = ({
+export const RecentClips = ({
   initialClips,
   user,
 }: {

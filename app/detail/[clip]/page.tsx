@@ -5,7 +5,7 @@ import { getUserDetail } from "@/services/users";
 import { getClipDetail, getRecentClips } from "@/services/clips";
 import { getFormattedDate, getTimeFromNow, getClippedTimestamp } from "@/utils/date";
 
-import { RecentClipLists } from "@/components/RecentClipLists";
+import { RecentClips } from "@/components/RecentClips";
 
 export default async function ClipDetail({
   params,
@@ -15,7 +15,7 @@ export default async function ClipDetail({
   };
 }) {
   const clipData = getClipDetail(params.clip);
-  const clipListsData = getRecentClips();
+  const clipListsData = getRecentClips(0);
   const [clip, clipLists] = await Promise.all([clipData, clipListsData]);
   const user = await getUserDetail(clip?.creatorId);
 
@@ -79,7 +79,7 @@ export default async function ClipDetail({
             </span>
           </div>
         </div>
-        <RecentClipLists clipLists={clipLists} />
+        <RecentClips initialClips={clipLists} />
       </div>
     </div>
   );
