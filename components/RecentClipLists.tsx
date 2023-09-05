@@ -46,7 +46,7 @@ export const RecentClipLists = ({ clipLists }: { clipLists?: ClipListsType }) =>
         <button
           type="button"
           onClick={loadMore}
-          className="rounded-full bg-blue-600 px-5 py-3 text-sm text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
+          className="rounded-2xl bg-slate-200 dark:bg-neutral-800 px-5 py-3 text-sm dark:text-slate-200 shadow-sm hover:bg-slate-300 dark:hover:bg-neutral-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
           더보기
         </button>
       </div>

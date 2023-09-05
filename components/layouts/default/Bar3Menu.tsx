@@ -52,13 +52,13 @@ export const Bar3Menu = ({ me }: { me?: IdentityType }) => {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1">
           <Popover.Panel className="absolute right-0 mt-10 w-screen max-w-sm">
-            <div className="w-full overflow-hidden rounded-3xl bg-white dark:bg-twitch-dark text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-              <div className="p-4 border-b">
+            <div className="w-full overflow-hidden rounded-3xl bg-white dark:bg-neutral-800 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+              <div className="p-4 border-b dark:border-neutral-600">
                 <PopoverButton
                   button={{
                     name: "트위치로 로그인",
                     description: "로그인 하고 클립 만들기",
-                    href: `https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=0373yf8vzqpo4f9ln4ajqrq9fim3hd&redirect_uri=${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/authorization&scope=clips%3Aedit%20user%3Aread%3Aemail%20user%3Aread%3Asubscriptions`,
+                    href: `https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_APP_PROTOCOL}://${process.env.NEXT_PUBLIC_APP_HOST}/api/authorization&scope=clips%3Aedit%20user%3Aread%3Aemail%20user%3Aread%3Asubscriptions`,
                     icon: LockClosedIcon,
                   }}
                 />
