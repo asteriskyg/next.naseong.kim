@@ -5,10 +5,7 @@ import { ClipType } from "type";
 import { getTimeFromNow } from "@/utils/date";
 
 const parseClipDuration = (duration: number) => {
-  if (duration > 59) {
-    return duration - 60 < 10 ? `1:0${duration - 60}` : `1:${duration - 60}`;
-  }
-
+  if (duration > 59) return duration - 60 < 10 ? `1:0${duration - 60}` : `1:${duration - 60}`;
   return duration < 10 ? `0:0${duration}` : `0:${duration}`;
 };
 

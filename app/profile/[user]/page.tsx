@@ -22,6 +22,7 @@ const subscriptionTier = (type: UserType["userType"], subscription: UserType["su
   if (type === "broadcaster" || !subscription) return undefined;
 
   const tier = subscription / 1000;
+
   return (
     <span className="shrink-0 inline-flex items-center gap-x-1.5 rounded-xl leading-2 tracking-tight bg-blue-100 dark:bg-blue-900 px-3 py-2 text-sm sm:text-base font-medium text-blue-600 dark:text-blue-200">
       <span className="text-base sm:text-lg">💎</span>
@@ -33,7 +34,7 @@ const subscriptionTier = (type: UserType["userType"], subscription: UserType["su
 const userType = (type: UserType["userType"]) => {
   if (type === "viewer") return undefined;
 
-  const badgeConfig = {
+  const badge = {
     developer: {
       emoji: "🔧",
       text: "개발자",
@@ -51,7 +52,7 @@ const userType = (type: UserType["userType"]) => {
   return (
     <span className="shrink-0 rounded-xl bg-slate-100 dark:bg-slate-700 px-3 py-2 text-sm sm:text-base font-medium text-slate-600 dark:text-slate-200">
       <span className="inline-flex items-center gap-x-1.5">
-        <span className="text-base sm:text-lg">{badgeConfig[type].emoji}</span> {badgeConfig[type].text}
+        <span className="text-base sm:text-lg">{badge[type].emoji}</span> {badge[type].text}
       </span>
     </span>
   );
