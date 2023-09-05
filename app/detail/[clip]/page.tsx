@@ -30,7 +30,7 @@ export default async function ClipDetail({
       <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border dark:border-neutral-600">
         <iframe
           title={clip.contentName}
-          src={`https://customer-${process.env.NEXT_PUBLIC_STREAM_CODE}.cloudflarestream.com/${clip.contentId}/iframe?preload=true&loop=true&poster=https%3A%2F%2Fcustomer-${process.env.NEXT_PUBLIC_STREAM_CODE}.cloudflarestream.com%2F${clip.contentId}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
+          src={`https://customer-${process.env.NEXT_PUBLIC_STREAM_ID}.cloudflarestream.com/${clip.contentId}/iframe?preload=true&loop=true&poster=https%3A%2F%2Fcustomer-${process.env.NEXT_PUBLIC_STREAM_ID}.cloudflarestream.com%2F${clip.contentId}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           className="border-0 absolute top-0 left-0 w-full h-full"
           allowFullScreen
