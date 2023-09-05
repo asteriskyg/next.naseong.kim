@@ -36,7 +36,7 @@ export default async function ClipDetail({
           allowFullScreen
         />
       </div>
-      <div className="flex flex-col items-start justify-between p-6 my-6 text-black dark:text-slate-200 bg-slate-100 dark:bg-neutral-800 rounded-3xl">
+      <div className="flex flex-col items-start justify-between p-6 sm:my-6 text-black dark:text-slate-200 sm:bg-slate-100 sm:dark:bg-neutral-800 rounded-3xl">
         <div>
           <div className="text-xl line-clamp-1 sm:text-2xl">{clip.contentName}</div>
           <div className="mb-3">{clip.gameName}</div>
