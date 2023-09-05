@@ -6,7 +6,7 @@ import { getIdentity } from "@/services/auth";
 
 import { ProfileMenu } from "./ProfileMenu";
 
-const LiveBadge = dynamic(() => import("@/components/LiveBadge").then((mod) => mod.LiveBadge));
+const LiveBadge = dynamic(() => import("@/components/layouts/default/LiveBadge").then((mod) => mod.LiveBadge));
 
 export const DefaultHeader = async () => {
   const token = cookies().get("authorization");
@@ -20,7 +20,7 @@ export const DefaultHeader = async () => {
             <span className="text-2xl text-black dark:text-slate-200">
               na.<b>clip</b>
             </span>
-            <span className="ml-1 mt-0.5 text-sm font-black text-blue-600">NEXT</span>
+            <span className="text-2xl font-medium text-blue-600 -m-1.5 p-1.5">_next</span>
           </Link>
           <LiveBadge />
         </div>
