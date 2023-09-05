@@ -14,7 +14,11 @@ export const getClipDetail = async (clip: string) => {
 export const getRecentClips = async () => {
   if (!process.env.NEXT_PUBLIC_API_URL) throw new Error("NEXT_PUBLIC_API_URL is not defined.");
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clip/recent`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clip/recent`, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   if (!res.ok) return undefined;
   return res.json() as Promise<ClipListsType>;

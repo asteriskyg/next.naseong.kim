@@ -16,15 +16,15 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
       href={`/detail/${clip.clipName}`}
-      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-lg bg-white hover:bg-stone-100 hover:shadow-lg border transition-all">
+      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-xl border bg-white transition-all hover:bg-slate-100 hover:shadow-lg dark:divide-neutral-600 dark:border-neutral-600 dark:bg-twitch-dark hover:dark:bg-neutral-800">
       <div className="relative bg-slate-100 dark:bg-neutral-800">
         <Image
-          src={`https://customer-lsoi5zwkd51of53g.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
+          src={`https://customer-${process.env.NEXT_PUBLIC_STREAM_CODE}.cloudflarestream.com/${clip.contentId}/thumbnails/thumbnail.jpg`}
           alt=""
           width={640}
           height={360}
         />
-        <span className="absolute bottom-1 right-1 inline-flex items-center rounded-lg bg-gray-50/90 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+        <span className="absolute bottom-1 right-1 inline-flex items-center rounded-lg bg-gray-50/90 px-2 py-1 text-xs font-medium text-neutral-600 ring-1 ring-inset ring-gray-500/10 dark:bg-twitch-dark/90 dark:text-white">
           {parseClipDuration(clip.clipDuration)}
         </span>
       </div>

@@ -13,14 +13,14 @@ export const DefaultHeader = async () => {
   const me = await getIdentity(token);
 
   return (
-    <header className="bg-white/80 backdrop-blur-xl border-b sticky top-0 z-10">
+    <header className="sticky top-0 z-10 border-b bg-slate-50/90 backdrop-blur-xl dark:border-neutral-600 dark:bg-twitch-dark/90">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 py-3">
         <div className="flex items-center gap-x-3">
-          <Link href="/" className="flex items-start -m-1.5 p-1.5">
-            <span className="text-2xl text-black">
+          <Link href="/" className="-m-1.5 flex items-start p-1.5">
+            <span className="text-2xl text-black dark:text-slate-200">
               na.<b>clip</b>
             </span>
-            <span className="text-sm font-black text-blue-600 ml-1 mt-0.5">NEXT</span>
+            <span className="ml-1 mt-0.5 text-sm font-black text-blue-600">NEXT</span>
           </Link>
           <LiveBadge />
         </div>
