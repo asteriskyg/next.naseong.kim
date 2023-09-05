@@ -13,7 +13,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.naseong.kim',
+        hostname: `${process.env.NEXT_PUBLIC_R2_BUCKET_ID}.r2.dev`,
       },
     ],
   },

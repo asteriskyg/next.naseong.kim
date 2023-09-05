@@ -45,7 +45,7 @@ export const ProfileBackground = ({ user }: { user?: UserType }) => {
     <div
       className="w-full aspect-w-2 aspect-h-1 sm:aspect-w-5 sm:aspect-h-2 md:aspect-w-7 md:aspect-h-2 lg:aspect-w-9 lg:aspect-h-2 bg-slate-100"
       style={translateY}>
-      <Image src={`https://cdn.naseong.kim/${user.profileBackgroundUrl}`} alt="" fill className="object-cover" />
+      <Image src={`https://${process.env.NEXT_PUBLIC_R2_BUCKET_ID}.r2.dev/${user.profileBackgroundUrl}`} alt="" fill className="object-cover" />
     </div>
   );
 };
