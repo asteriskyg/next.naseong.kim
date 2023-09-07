@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { Card, AnchorButton, NormalButton } from "./layout";
+import { Card, AnchorButton, NormalButton } from "./baseComponent";
 
 export const AdCard = () => {
   const [adStatus, setAdStatus] = useState(false);

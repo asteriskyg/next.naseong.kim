@@ -4,7 +4,7 @@ import { getIdentity } from "@/services/auth";
 
 import { AdCard } from "@/components/extension/create/AdCard";
 import { CreateClip } from "@/components/extension/create/CreateClip";
-import { Card, AnchorButton } from "@/components/extension/create/layout";
+import { Card, AnchorButton } from "@/components/extension/create/baseComponent";
 
 // eslint-disable-next-line react/function-component-definition
 export default async function Index() {
