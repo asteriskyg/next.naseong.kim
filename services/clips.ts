@@ -22,7 +22,7 @@ export const getRecentClips = async (offset: number) => {
     `${process.env.NEXT_PUBLIC_API_URL}/clip/recent?offset=${offset}`,
     {
       next: {
-        revalidate: 60,
+        revalidate: 0,
       },
     }
   );
