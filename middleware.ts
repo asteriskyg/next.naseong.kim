@@ -1,23 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwtDecode, { JwtPayload } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
+import type { JwtPayload } from "jwt-decode";
 import { refreshIdentity } from "@/services/auth";
 
 export const middleware = async (req: NextRequest) => {
-  const res = NextResponse.next();
+  if (!process.env.NEXT_PUBLIC_APP_URL)
+    throw new Error("NEXT_PUBLIC_APP_URL is not defined.");
+
+  const nextRes = NextResponse.next();
+  const RedirectRes = NextResponse.redirect(process.env.NEXT_PUBLIC_APP_URL);
 
   const authorization = req.cookies.get("authorization");
   if (authorization) {
     const jwt = jwtDecode(authorization.value) as JwtPayload;
-    if (jwt?.exp && jwt.exp * 1000 > Date.now()) return res;
+    if (jwt?.exp && jwt.exp * 1000 > Date.now()) return nextRes;
   }
 
   const refresh = req.cookies.get("refresh");
   const token = await refreshIdentity(refresh?.value);
 
-  if (!token) return res;
+  if (!token) return nextRes;
 
-  res.cookies.set("authorization", token.access, {
+  RedirectRes.cookies.set("authorization", token.access, {
     domain: process.env.NEXT_PUBLIC_APP_HOST,
     path: "/",
     httpOnly: true,
@@ -26,7 +31,7 @@ export const middleware = async (req: NextRequest) => {
     maxAge: 60 * 30,
   });
 
-  res.cookies.set("refresh", token.refresh, {
+  RedirectRes.cookies.set("refresh", token.refresh, {
     domain: process.env.NEXT_PUBLIC_APP_HOST,
     path: "/",
     httpOnly: true,
@@ -35,5 +40,9 @@ export const middleware = async (req: NextRequest) => {
     maxAge: 60 * 60 * 24 * 7 * 2,
   });
 
-  return res;
+  return RedirectRes;
+};
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
