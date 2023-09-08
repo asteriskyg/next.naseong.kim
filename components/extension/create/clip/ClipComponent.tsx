@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactElement } from "react";
+import type { ClipType } from "type";
 
 import { Card, AnchorButton, NormalButton } from "../baseComponent";
 
@@ -15,7 +16,7 @@ export const ClipCreate = () => {
   );
 };
 
-export const ClipCreateSuccess = ({ clip }: { clip: string }) => {
+export const ClipCreateSuccess = ({ clip }: { clip: ClipType }) => {
   return (
     <Card
       emoji="🎉"
@@ -25,7 +26,7 @@ export const ClipCreateSuccess = ({ clip }: { clip: string }) => {
         <AnchorButton
           key={0}
           target="_blank"
-          href={`${process.env.NEXT_PUBLIC_APP_URL}/detail/${clip}`}
+          href={`${process.env.NEXT_PUBLIC_APP_URL}/detail/${clip.clipName}`}
           text="클립 보기"
           color="green"
         />,
