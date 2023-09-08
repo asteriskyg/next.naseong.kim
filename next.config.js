@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: `customer-${process.env.NEXT_PUBLIC_STREAM_ID}.cloudflarestream.com`,
+        hostname: `${process.env.NEXT_PUBLIC_STREAM_HOSTNAME}`,
       },
       {
         protocol: 'https',
