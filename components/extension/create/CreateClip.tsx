@@ -3,7 +3,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { ClipType, IdentityType, StreamInfoType } from "type";
 
-import { getTwitchStreamProxy } from "@/services/stream";
 import { createClip } from "@/services/clips";
 
 import {
@@ -19,9 +18,14 @@ import {
 } from "./clip/ClipComponent";
 import { NormalButton } from "./baseComponent";
 
-export const CreateClip = ({ identity }: { identity?: IdentityType }) => {
+export const CreateClip = ({
+  stream,
+  identity,
+}: {
+  stream?: StreamInfoType;
+  identity?: IdentityType;
+}) => {
   const [status, setStatus] = useState("streamFetching");
-  const [stream, setStream] = useState<StreamInfoType | undefined>(undefined);
   const [clip, setClip] = useState<ClipType | undefined>(undefined);
   const [component, setComponent] = useState<ReactElement | undefined>(
     <StreamFetching />
@@ -29,7 +33,6 @@ export const CreateClip = ({ identity }: { identity?: IdentityType }) => {
 
   useEffect(() => {
     const updateComponent = () => {
-      if (status === "streamFetching") return setComponent(<StreamFetching />);
       if (status === "streamFetchingFail")
         return setComponent(<StreamFetchingFail />);
       if (status === "streamOnline")
@@ -62,19 +65,15 @@ export const CreateClip = ({ identity }: { identity?: IdentityType }) => {
   }, [status, stream, clip, identity]);
 
   useEffect(() => {
-    const getTwitchStream = async () => {
-      const response = await getTwitchStreamProxy();
+    const checkStream = () => {
+      if (!stream) return setStatus("streamFetchingFail");
+      if (stream.data.length === 0) return setStatus("streamOffline");
 
-      if (!response) return setStatus("streamFetchingFail");
-
-      if (response.data.length === 0) return setStatus("streamOffline");
-
-      setStream(response);
       return setStatus("streamOnline");
     };
 
-    getTwitchStream();
-  }, []);
+    checkStream();
+  }, [stream]);
 
   useEffect(() => {
     const create = async () => {
