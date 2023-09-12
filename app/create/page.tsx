@@ -5,12 +5,15 @@ import { getTwitchStream } from "@/services/stream";
 
 import { AdCard } from "@/components/extension/create/AdCard";
 import { CreateClip } from "@/components/extension/create/CreateClip";
-import { Card, AnchorButton } from "@/components/extension/create/baseComponent";
+import {
+  Card,
+  AnchorButton,
+} from "@/components/extension/create/baseComponent";
 
 export default async function Index() {
   const token = cookies().get("authorization");
   const identity = await getIdentity(token);
-  const stream = await getTwitchStream()
+  const stream = await getTwitchStream();
 
   return (
     <div className="bg-white dark:bg-twitch-dark">
@@ -18,23 +21,9 @@ export default async function Index() {
         <AdCard />
         <CreateClip stream={stream} identity={identity} />
         <Card
-          emoji="🎬"
-          title="유튜브 다시보기에서 클립을 만들어 보세요."
-          color="slate"
-          buttons={[
-            <AnchorButton
-              key={0}
-              target="_self"
-              href="/import"
-              text="바로가기"
-              color="blue"
-            />,
-          ]}
-        />
-        <Card
           emoji="💢"
           title="사용하는데 문제가 있나요?"
-          subtitle="내용을 알려주시면 빠르게 도와드릴 수 있어요."
+          subtitle="내용을 알려주시면 빠르게 도와드릴게요."
           color="slate"
           buttons={[
             <AnchorButton

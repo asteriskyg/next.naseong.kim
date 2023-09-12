@@ -25,13 +25,6 @@ export const StreamFetchingFail = () => {
       color="red"
       buttons={[
         <AnchorButton
-          key={0}
-          target="_blank"
-          href="https://twitch.tv/naseongkim"
-          text="트위치 바로가기"
-          color="purple"
-        />,
-        <AnchorButton
           key={1}
           target="_blank"
           href="https://naseongkim.channel.io"
@@ -86,21 +79,21 @@ export const StreamOffline = () => {
   return (
     <Card
       emoji="💤"
-      title="오프라인"
+      title="방송이 꺼져있을 때..."
       color="slate"
       buttons={[
         <AnchorButton
           key={0}
           target="_blank"
           href="https://tgd.kr/s/naseongkim"
-          text="트게더 바로가기"
+          text="트게더"
           color="purple"
         />,
         <AnchorButton
           key={1}
           target="_blank"
           href="https://www.youtube.com/channel/UCfLvxrf3KoKpUG0bBHIZJ-g"
-          text="유튜브 다시보기"
+          text="방송 다시보기"
           color="red"
         />,
       ]}
