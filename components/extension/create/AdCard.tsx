@@ -38,7 +38,7 @@ export const AdCard = () => {
             localStorage.setItem("hide-extension-ad", "true");
             setAdStatus(false);
           }}
-          text="7일간 보지 않기"
+          text="나중에 보기"
         />,
       ]}
     />

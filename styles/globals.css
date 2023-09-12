@@ -9,7 +9,7 @@
 body {
   font-family: "SUIT", "Tossface", sans-serif;
   word-break: keep-all;
-  line-break: anywhere;
+  word-wrap: break-word;
 }
 
 .suite {
