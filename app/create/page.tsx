@@ -9,6 +9,7 @@ import {
   Card,
   AnchorButton,
 } from "@/components/extension/create/baseComponent";
+import { StaggerChildren } from "@/components/motion";
 
 export default async function Index() {
   const token = cookies().get("authorization");
@@ -17,7 +18,7 @@ export default async function Index() {
 
   return (
     <div className="bg-white dark:bg-twitch-dark">
-      <div className="flex flex-col m-auto max-w-[26rem] p-6 gap-6">
+      <StaggerChildren className="flex flex-col m-auto max-w-[26rem] p-6 gap-6">
         <AdCard />
         <CreateClip stream={stream} identity={identity} />
         <Card
@@ -35,7 +36,7 @@ export default async function Index() {
             />,
           ]}
         />
-      </div>
+      </StaggerChildren>
     </div>
   );
 }
