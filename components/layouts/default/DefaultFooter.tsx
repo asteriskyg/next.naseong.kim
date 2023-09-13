@@ -19,8 +19,8 @@ const navigation = [
 
 export const DefaultFooter = () => {
   return (
-    <footer className="border-t bg-slate-50 text-black dark:border-neutral-600 dark:bg-twitch-dark dark:text-slate-200">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+    <footer className="flex items-center h-14 border-t bg-slate-50 text-black dark:border-neutral-600 dark:bg-twitch-dark dark:text-slate-200">
+      <div className="mx-auto flex max-w-7xl w-full items-center justify-between px-6">
         <div className="flex items-center gap-3">
           <Link
             href="/"
