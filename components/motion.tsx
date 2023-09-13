@@ -3,7 +3,13 @@
 import { ReactNode, ReactElement, Children } from "react";
 import { motion } from "framer-motion";
 
-export const StaggerChildren = ({ children, className }: { children: ReactNode, className: string }) => {
+export const StaggerChildren = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className: string;
+}) => {
   const childrenArray = Children.toArray(children) as ReactElement[];
 
   const variants = {
@@ -29,7 +35,7 @@ export const StaggerChildren = ({ children, className }: { children: ReactNode, 
   };
 
   return (
-    <motion.ul
+    <motion.div
       className={className}
       variants={variants.list}
       initial="hidden"
@@ -38,11 +44,11 @@ export const StaggerChildren = ({ children, className }: { children: ReactNode, 
     >
       {childrenArray?.map((item) => {
         return !checkEmptyObject(item.props) ? (
-          <motion.li key={item.key} variants={variants.item}>
+          <motion.div key={item.key} variants={variants.item}>
             {item}
-          </motion.li>
+          </motion.div>
         ) : undefined;
       })}
-    </motion.ul>
+    </motion.div>
   );
 };

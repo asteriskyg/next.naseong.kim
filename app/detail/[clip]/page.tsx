@@ -12,6 +12,7 @@ import {
 import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
 import { DefaultFooter } from "@/components/layouts/default/DefaultFooter";
 import { RecentClips } from "@/components/RecentClips";
+import { StaggerChildren } from "@/components/motion";
 
 export default async function ClipDetail({
   params,
@@ -37,8 +38,8 @@ export default async function ClipDetail({
   return (
     <>
       <DefaultHeader />
-      <div className="mx-auto max-w-7xl sm:p-6 sm:pb-0">
-        <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border dark:border-neutral-600">
+      <StaggerChildren className="mx-auto max-w-7xl sm:p-6 sm:pb-0">
+        <div className="relative pt-[56.25%] sm:overflow-hidden sm:rounded-lg border-b sm:border bg-slate-200 dark:bg-neutral-800 dark:border-neutral-600">
           <iframe
             title={clip.contentName}
             src={`https://${process.env.NEXT_PUBLIC_STREAM_HOSTNAME}/clip/${clip.contentId}/iframe?preload=true&loop=true`}
@@ -98,7 +99,7 @@ export default async function ClipDetail({
           </div>
           <RecentClips initialClips={clipLists} />
         </div>
-      </div>
+      </StaggerChildren>
       <DefaultFooter />
     </>
   );

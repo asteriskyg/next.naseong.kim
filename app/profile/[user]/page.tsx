@@ -8,6 +8,7 @@ import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
 import { DefaultFooter } from "@/components/layouts/default/DefaultFooter";
 import { ProfileBackground } from "@/components/ProfileBackground";
 import { RecentClips } from "@/components/RecentClips";
+import { StaggerChildren } from "@/components/motion";
 
 const followDuration = (
   type: UserType["userType"],
@@ -83,34 +84,34 @@ export default async function UserProfile({
   return (
     <>
       <DefaultHeader />
-      <div className="bg-white dark:bg-twitch-dark">
+      <StaggerChildren className="relative bg-white dark:bg-twitch-dark dark:border-neutral-600">
         <ProfileBackground user={user} />
         <div className="relative bg-white dark:bg-twitch-dark border-t dark:border-neutral-600">
           <div className="mx-auto max-w-7xl pb-8 px-6">
-            <div className="mb-8">
-              <div className="z-10 -translate-y-1/3">
-                <Image
-                  src={user.profileImageUrl}
-                  alt=""
-                  width={128}
-                  height={128}
-                  className="w-24 h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 rounded-full border dark:border-neutral-600 shadow-lg sm:shadow-xl bg-white dark:bg-twitch-dark"
-                />
+            <div className="z-10 -translate-y-1/3">
+              <Image
+                src={user.profileImageUrl}
+                alt=""
+                width={128}
+                height={128}
+                className="w-24 h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 rounded-full border dark:border-neutral-600 shadow-lg sm:shadow-xl bg-white dark:bg-twitch-dark"
+              />
+            </div>
+            <div className="flex flex-col md:flex-row gap-3 justify-between md:items-center mb-6">
+              <div className="flex items-baseline text-3xl font-bold leading-tight text-black dark:text-slate-200 suite">
+                <span className="line-clamp-1">{user.displayName}</span>
+                <span className="shrink-0 text-gray-400 text-sm ml-2">
+                  #{user.twitchUserId}
+                </span>
               </div>
-              <div className="flex flex-col md:flex-row gap-3 justify-between md:items-center mb-6">
-                <div className="flex items-baseline text-3xl font-bold leading-tight text-black dark:text-slate-200 suite">
-                  <span className="line-clamp-1">{user.displayName}</span>
-                  <span className="shrink-0 text-gray-400 text-sm ml-2">
-                    #{user.twitchUserId}
-                  </span>
-                </div>
-                <div className="flex gap-3 overflow-auto">
-                  {followDuration(user.userType, user.follow)}
-                  {subscriptionTier(user.userType, user.subscription)}
-                  {userType(user.userType)}
-                </div>
+              <div className="flex gap-3 overflow-auto">
+                {followDuration(user.userType, user.follow)}
+                {subscriptionTier(user.userType, user.subscription)}
+                {userType(user.userType)}
               </div>
             </div>
+          </div>
+          <div className="mx-auto max-w-7xl px-6">
             <div className="relative mb-6">
               <div
                 className="absolute inset-0 flex items-center"
@@ -124,10 +125,12 @@ export default async function UserProfile({
                 </span>
               </div>
             </div>
+          </div>
+          <div className="mx-auto max-w-7xl pb-8 px-6">
             <RecentClips initialClips={clips} user={user.twitchUserId} />
           </div>
         </div>
-      </div>
+      </StaggerChildren>
       <DefaultFooter />
     </>
   );
