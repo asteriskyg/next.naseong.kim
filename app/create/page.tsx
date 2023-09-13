@@ -1,26 +1,22 @@
-import { cookies } from "next/headers";
+import { Suspense } from "react";
 
-import { getIdentity } from "@/services/auth";
-import { getTwitchStream } from "@/services/stream";
-
+import { StreamFetching } from "@/components/extension/create/clip/StreamComponent";
 import { AdCard } from "@/components/extension/create/AdCard";
-import { CreateClip } from "@/components/extension/create/CreateClip";
 import {
   Card,
   AnchorButton,
 } from "@/components/extension/create/baseComponent";
 import { StaggerChildren } from "@/components/motion";
+import { CreateClip } from "@/components/extension/create/CreateClip";
 
 export default async function Index() {
-  const token = cookies().get("authorization");
-  const identity = await getIdentity(token);
-  const stream = await getTwitchStream();
-
   return (
     <div className="bg-white dark:bg-twitch-dark">
       <StaggerChildren className="flex flex-col m-auto max-w-[26rem] p-6 gap-6">
         <AdCard />
-        <CreateClip stream={stream} identity={identity} />
+        <Suspense fallback={<StreamFetching />}>
+          <CreateClip />
+        </Suspense>
         <Card
           emoji="💢"
           title="사용하는데 문제가 있나요?"
