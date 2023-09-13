@@ -6,6 +6,7 @@ import type { ClipListsType, ClipType, UserType } from "type";
 import { getRecentClips } from "@/services/clips";
 import { getUserClips } from "@/services/users";
 
+import { StaggerChildren } from "./motion";
 import { ClipItem } from "./ClipItem";
 
 export const RecentClips = ({
@@ -41,18 +42,20 @@ export const RecentClips = ({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 bg-white dark:bg-twitch-dark">
+      <StaggerChildren className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 bg-white dark:bg-twitch-dark">
         {clips ? (
           clips?.map((clip: ClipType) => {
-            return <ClipItem key={clip.contentId} clip={clip} />;
+            return <ClipItem key={clip.clipName} clip={clip} />;
           })
         ) : (
           <div className="p-6 rounded-3xl bg-slate-100 dark:bg-neutral-800 dark:text-slate-200">
             <div className="text-4xl mb-6 tossface">⚠️</div>
-            <span className="text-xl">클립을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</span>
+            <span className="text-xl">
+              클립을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.
+            </span>
           </div>
         )}
-      </div>
+      </StaggerChildren>
       <div className="mt-6 flex w-full items-center justify-center">
         {clips && listEnd ? (
           <span className="py-4 px-6 bg-slate-100 dark:bg-neutral-800 rounded-3xl dark:text-slate-200">
@@ -63,7 +66,8 @@ export const RecentClips = ({
             type="button"
             onClick={loadMore}
             disabled={loading}
-            className="rounded-2xl bg-slate-100 dark:bg-neutral-800 px-5 py-3 text-sm dark:text-slate-200 shadow-sm hover:bg-slate-200 dark:hover:bg-neutral-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors">
+            className="rounded-2xl bg-slate-100 dark:bg-neutral-800 px-5 py-3 text-sm dark:text-slate-200 shadow-sm hover:bg-slate-200 dark:hover:bg-neutral-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors"
+          >
             {loading ? "로딩중..." : "더보기"}
           </button>
         )}

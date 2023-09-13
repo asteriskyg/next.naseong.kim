@@ -13,7 +13,7 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
   return (
     <Link
       href={`/detail/${clip.clipName}`}
-      className="inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-xl border bg-white transition-all hover:bg-slate-100 hover:shadow-lg dark:divide-neutral-600 dark:border-neutral-600 dark:bg-twitch-dark hover:dark:bg-neutral-800">
+      className="w-full inline-flex flex-col divide-y divide-gray-200 overflow-hidden rounded-xl border bg-white transition-all hover:bg-slate-100 hover:shadow-lg dark:divide-neutral-600 dark:border-neutral-600 dark:bg-twitch-dark hover:dark:bg-neutral-800">
       <div className="relative bg-slate-100 dark:bg-neutral-800">
         <Image
           src={`https://${process.env.NEXT_PUBLIC_STREAM_HOSTNAME}/clip/${clip.contentId}/thumbnails/thumbnail.jpg`}
