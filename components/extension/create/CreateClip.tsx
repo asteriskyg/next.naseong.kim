@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { getIdentity } from "@/services/auth";
 import { getTwitchStream } from "@/services/stream";
 
-import { useCreateClip } from "../../../hooks/useCreateClip";
+import { CreateClipComponent } from "./CreateClipComponent";
 
 export const CreateClip = async () => {
   const token = cookies().get("authorization");
@@ -15,7 +15,5 @@ export const CreateClip = async () => {
     streamResponse,
   ]);
 
-  const component = useCreateClip({ stream, identity });
-
-  return component;
+  return <CreateClipComponent stream={stream} identity={identity} />;
 };

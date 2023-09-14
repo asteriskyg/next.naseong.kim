@@ -55,7 +55,7 @@ export const StreamOnline = ({
         <AnchorButton
           key={0}
           target="_blank"
-          href={`https://twitch.tv/${stream.data[0].user_name}`}
+          href={`https://twitch.tv/${stream.data[0].user_login}`}
           text="방송 보기"
           color="purple"
         />,

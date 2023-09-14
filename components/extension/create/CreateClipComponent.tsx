@@ -17,7 +17,7 @@ import {
 } from "@/components/extension/create/clip/ClipComponent";
 import { NormalButton } from "@/components/extension/create/baseComponent";
 
-export const useCreateClip = ({
+export const CreateClipComponent = ({
   stream,
   identity,
 }: {
