@@ -5,6 +5,7 @@ import { AdCard } from "@/components/extension/create/AdCard";
 import {
   Card,
   AnchorButton,
+  MiniCard,
 } from "@/components/extension/create/baseComponent";
 import { StaggerChildren } from "@/components/motion";
 import { CreateClip } from "@/components/extension/create/CreateClip";
@@ -32,6 +33,69 @@ export default async function Index() {
             />,
           ]}
         />
+        <div className="-mb-4 text-lg text-black dark:text-slate-200">
+          바로가기
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <MiniCard
+            icon="❤️"
+            url="https://app.twip.kr/donate/naseongkim"
+            title="방송 후원하기"
+            color="rose"
+          />
+          <MiniCard
+            icon="🪐"
+            url="https://tgd.kr/s/naseongkim"
+            title="트게더"
+            color="purple"
+          />
+        </div>
+        <div className="-mb-4 text-lg text-black dark:text-slate-200">
+          유튜브
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <MiniCard
+            icon="▶️"
+            url="https://www.youtube.com/@Naseongkim"
+            title="김나성"
+            color="orange"
+          />
+          <MiniCard
+            icon="🛌"
+            url="https://www.youtube.com/channel/UCxbWbdvNz3VCTVumDIc0XrA"
+            title="긴나성"
+            color="sky"
+          />
+          <MiniCard
+            icon="💾"
+            url="https://www.youtube.com/channel/UCfLvxrf3KoKpUG0bBHIZJ-g"
+            title="딥나성"
+            color="slate"
+          />
+        </div>
+        <div className="-mb-4 text-lg text-black dark:text-slate-200">
+          다른 링크
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <MiniCard
+            icon="🗓"
+            url="https://bit.ly/3QeyGNd"
+            title="!일정"
+            color="red"
+          />
+          <MiniCard
+            icon="🚛"
+            url="https://bit.ly/2N1X9Gp"
+            title="!과금"
+            color="green"
+          />
+          <MiniCard
+            icon="📕"
+            url="https://naseongkim.channel.io"
+            title="!명령어"
+            color="pink"
+          />
+        </div>
       </StaggerChildren>
     </div>
   );

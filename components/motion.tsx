@@ -52,3 +52,30 @@ export const StaggerChildren = ({
     </motion.div>
   );
 };
+
+export const MouseHover = ({ children }: { children: ReactNode }) => {
+  const variants = {
+    initial: {
+      scale: 1,
+      filter: "saturate(1)",
+    },
+    hover: {
+      scale: 1.05,
+      filter: "saturate(2)",
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={variants}
+      initial="initial"
+      whileHover="hover"
+      whileTap="hover"
+    >
+      {children}
+    </motion.div>
+  );
+};
