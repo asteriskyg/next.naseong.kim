@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StreamType } from "type";
 
 import { getTwitchStream } from "@/services/stream";
 
@@ -17,10 +18,14 @@ export const AwaitStream = async () => {
   );
 };
 
-export const StreamOnline = async () => {
+export const StreamOnline = async ({
+  id,
+}: {
+  id: StreamType["user_login"];
+}) => {
   return (
     <Link
-      href="/live"
+      href={`https://www.twitch.tv/${id}`}
       target="_blank"
       className="inline-flex items-center gap-x-2 rounded-lg bg-red-100 px-2 py-1 text-sm font-medium text-red-500 transition-colors hover:bg-red-200 dark:bg-red-900 dark:text-red-200 dark:hover:bg-red-800"
     >
@@ -55,5 +60,5 @@ export const StreamBadge = async () => {
   const stream = await getTwitchStream();
   if (!stream || stream.data.length === 0) return <StreamOffline />;
 
-  return <StreamOnline />;
+  return <StreamOnline id={stream.data[0].user_login} />;
 };
