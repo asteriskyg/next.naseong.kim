@@ -7,6 +7,7 @@ import {
   getFormattedDate,
   getTimeFromNow,
   getClippedTimestamp,
+  getTimeDiff,
 } from "@/utils/date";
 
 import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
@@ -28,6 +29,7 @@ export default async function ClipDetail({
 
   if (!clip || !user) return <div>404</div>;
 
+  const clipLastEdited = getTimeDiff(Date.now(), clip.clipLastEdited, "m");
   const streamDate = getFormattedDate(clip.streamStartedAt, "YYYY년 MM월 DD일");
   const timeFromNow = getTimeFromNow(clip.streamStartedAt);
   const timestamp = getClippedTimestamp(
@@ -48,6 +50,34 @@ export default async function ClipDetail({
             allowFullScreen
           />
         </div>
+        {clipLastEdited <= 10 ? (
+          <div className="sm:text-md mx-6 mt-6 sm:mx-0 flex flex-col md:flex-row items-start md:items-center rounded-3xl bg-orange-100 dark:bg-yellow-800/50 p-4 sm:text-lg text-dark dark:text-slate-200">
+            <svg
+              className="animate-spin mr-3 mb-3 md:mb-0 h-6 w-6 text-orange-500 dark:text-yellow-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            <div className="flex flex-wrap gap-x-1">
+              <span>아직 동영상을 처리하고 있어요.</span>
+              <span>클립이 보이지 않거나, 화질이 나쁠 수 있어요.</span>
+            </div>
+          </div>
+        ) : undefined}
         <div className="flex flex-col items-start justify-between p-6 sm:my-6 text-black dark:text-slate-200 sm:bg-slate-100 sm:dark:bg-neutral-800 rounded-3xl">
           <div>
             <div className="text-xl line-clamp-1 sm:text-2xl">
