@@ -1,11 +1,21 @@
-import { Suspense } from "react";
-import Link from "next/link";
 import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 
 import { getIdentity } from "@/services/auth";
 
-import { AwaitStream, StreamBadge } from "./StreamBadge";
+import { AwaitStream } from "./StreamBadge";
 import { ProfileMenu } from "./ProfileMenu";
+
+const StreanBadge = dynamic(
+  () =>
+    import("@/components/layouts/default/StreamBadge").then(
+      (mod) => mod.StreamBadge
+    ),
+  {
+    loading: () => <AwaitStream />,
+  }
+);
 
 export const DefaultHeader = async () => {
   const token = cookies().get("authorization");
@@ -23,9 +33,7 @@ export const DefaultHeader = async () => {
               _next
             </span>
           </Link>
-          <Suspense fallback={<AwaitStream />}>
-            <StreamBadge />
-          </Suspense>
+          <StreanBadge />
         </div>
         <ProfileMenu user={me} />
       </nav>
