@@ -23,7 +23,7 @@ export const ClipItem = ({ clip }: { clip: ClipType }) => {
           alt=""
           width={640}
           height={360}
-          loading="eager"
+          priority
         />
         <span className="absolute bottom-1 right-1 inline-flex items-center rounded-lg bg-gray-50/90 px-2 py-1 text-xs font-medium text-neutral-600 ring-1 ring-inset ring-gray-500/10 dark:bg-twitch-dark/90 dark:text-white">
           {parseClipDuration(clip.clipDuration)}
