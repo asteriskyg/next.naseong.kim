@@ -67,7 +67,7 @@ export const StreamOnline = ({
             text="로그인"
             color="blue"
             target="_blank"
-            href={`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/api/authorization&scope=clips%3Aedit%20user%3Aread%3Aemail%20user%3Aread%3Asubscriptions`}
+            href={`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/api/authorization&scope=clips:edit%20user:read:email%20user:read:subscriptions`}
           />
         ),
       ]}

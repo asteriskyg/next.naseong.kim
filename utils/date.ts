@@ -17,7 +17,7 @@ export const getTimeFromNow = (date: ConfigType) => {
 export const getTimeDiff = (
   to: ConfigType,
   from: ConfigType,
-  format: QUnitType | OpUnitType
+  format: QUnitType | OpUnitType,
 ) => {
   return dayjs(to).diff(from, format);
 };

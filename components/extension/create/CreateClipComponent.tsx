@@ -27,7 +27,7 @@ export const CreateClipComponent = ({
   const [status, setStatus] = useState("streamOffline");
   const [clip, setClip] = useState<ClipType | undefined>(undefined);
   const [component, setComponent] = useState<ReactElement | undefined>(
-    <StreamOffline />
+    <StreamOffline />,
   );
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export const CreateClipComponent = ({
                 text="클립 만들기"
               />
             }
-          />
+          />,
         );
       if (status === "streamOffline") return setComponent(<StreamOffline />);
       if (status === "clipCreate") return setComponent(<ClipCreate />);
@@ -77,16 +77,15 @@ export const CreateClipComponent = ({
   useEffect(() => {
     const create = async () => {
       const response = await createClip();
-
       if (!response) return setStatus("clipCreateFail");
 
       setClip(response);
-      return setStatus("clipCreateSuccess");
+      setStatus("clipCreateSuccess");
+
+      return undefined;
     };
 
-    if (status === "clipCreate") {
-      create();
-    }
+    if (status === "clipCreate") create();
   }, [status]);
 
   return component;

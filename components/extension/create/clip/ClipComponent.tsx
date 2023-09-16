@@ -1,9 +1,8 @@
 "use client";
 
-import type { ReactElement } from "react";
 import type { ClipType } from "type";
 
-import { Card, AnchorButton, NormalButton } from "../baseComponent";
+import { Card, AnchorButton } from "../baseComponent";
 
 export const ClipCreate = () => {
   return (
@@ -31,22 +30,6 @@ export const ClipCreateSuccess = ({ clip }: { clip: ClipType }) => {
           color="green"
         />,
       ]}
-    />
-  );
-};
-
-export const ClipCreateError = ({
-  button,
-}: {
-  button: typeof NormalButton & ReactElement;
-}) => {
-  return (
-    <Card
-      emoji="⚠️"
-      title="클립을 만들지 못했어요."
-      subtitle="다시 시도해 주세요."
-      color="orange"
-      buttons={[button]}
     />
   );
 };

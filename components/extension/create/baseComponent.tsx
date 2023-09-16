@@ -53,14 +53,14 @@ export const Card = ({
 
   return (
     <div
-      className={`flex-col rounded-3xl selection:items-center p-6 md:flex ${bgColorSchemePicker(
-        color
+      className={`flex-col rounded-3xl p-6 selection:items-center md:flex ${bgColorSchemePicker(
+        color,
       )}`}
     >
       <div className="flex flex-col gap-3">
-        <span className="text-4xl tossface">{emoji}</span>
-        <div className="flex flex-col gap-1 mb-6">
-          <div className="overflow-hidden text-xl text-black dark:text-slate-200 pr-6">
+        <span className="tossface text-4xl">{emoji}</span>
+        <div className="mb-6 flex flex-col gap-1">
+          <div className="overflow-hidden pr-6 text-xl text-black dark:text-slate-200">
             {title}
           </div>
           {subtitle ? (
@@ -90,7 +90,7 @@ export const MiniCard = ({
     <MouseHover>
       <Link
         className={`flex h-32 w-full cursor-pointer flex-col items-start justify-between rounded-3xl p-5 transition-colors duration-300 ease-in-out ${bgColorSchemePicker(
-          color
+          color,
         )}`}
         href={url}
         target="_blank"
@@ -115,8 +115,8 @@ export const NormalButton = ({
     <button
       type="button"
       onClick={effect}
-      className={`w-full text-center text-sm rounded-2xl transition-colors p-4 ${btnColorSchemePicker(
-        color
+      className={`w-full rounded-2xl p-4 text-center text-sm transition-colors ${btnColorSchemePicker(
+        color,
       )}`}
     >
       {text}
@@ -139,8 +139,8 @@ export const AnchorButton = ({
     <a
       target={target}
       href={href}
-      className={`w-full text-center text-sm rounded-2xl transition-colors p-4 ${btnColorSchemePicker(
-        color
+      className={`w-full rounded-2xl p-4 text-center text-sm transition-colors ${btnColorSchemePicker(
+        color,
       )}`}
     >
       {text}

@@ -20,18 +20,18 @@ export const getTwitchStream = async () => {
         Authorization: `Bearer ${token.access_token}`,
         "Client-Id": process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID,
       },
-    }
+    },
   );
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<StreamInfoType>;
+  return (await res.json()) as Promise<StreamInfoType>;
 };
 
-export const getTwitchStreamProxy = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/streamV2`).catch(
-    () => undefined
-  );
-
-  if (!res?.ok) return undefined;
-  return res.json() as Promise<StreamInfoType>;
-};
+// export const getTwitchStreamProxy = async () => {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/streamV2`).catch(
+//     () => undefined,
+//   );
+//
+//   if (!res?.ok) return undefined;
+//   return (await res.json()) as Promise<StreamInfoType>;
+// };

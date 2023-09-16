@@ -6,7 +6,7 @@ export const revalidateByToken = async (tag: string) => {
     `${process.env.NEXT_PUBLIC_APP_URL}/api/revalidate?tag=${tag}`,
     {
       method: "POST",
-    }
+    },
   );
 
   if (!res.ok) return undefined;

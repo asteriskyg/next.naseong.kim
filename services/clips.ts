@@ -7,11 +7,11 @@ export const getClipDetail = async (clip: string) => {
   if (!clip) return undefined;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/clip/detail?id=${clip}`
+    `${process.env.NEXT_PUBLIC_API_URL}/clip/detail?id=${clip}`,
   );
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<ClipType>;
+  return (await res.json()) as Promise<ClipType>;
 };
 
 export const getRecentClips = async (offset: number) => {
@@ -24,11 +24,11 @@ export const getRecentClips = async (offset: number) => {
       next: {
         revalidate: 0,
       },
-    }
+    },
   );
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<ClipListsType>;
+  return (await res.json()) as Promise<ClipListsType>;
 };
 
 export const createClip = async () => {
@@ -40,5 +40,5 @@ export const createClip = async () => {
   });
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<ClipType>;
+  return (await res.json()) as Promise<ClipType>;
 };

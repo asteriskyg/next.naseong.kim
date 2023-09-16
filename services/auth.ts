@@ -10,11 +10,11 @@ export const getServiceToken = async (code: string | null) => {
   if (!code) return undefined;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/login?code=${code}`
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login?code=${code}`,
   );
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<{
+  return (await res.json()) as Promise<{
     access: string;
     refresh: string;
   }>;
@@ -28,29 +28,27 @@ export const getTwitchAccessToken = async () => {
     throw new Error("TWITCH_CLIENT_SECRET is not defined.");
 
   const request = async () => {
-    const response = await fetch(
+    return fetch(
       `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
       {
         next: { tags: ["TwitchAccessToken"] },
         cache: "force-cache",
         method: "POST",
-      }
+      },
     );
-
-    return response;
   };
 
   try {
     const token = await request();
 
-    return token.json() as Promise<TwitchClientCredentialsType>;
+    return (await token.json()) as Promise<TwitchClientCredentialsType>;
   } catch (e) {
     await revalidateByToken("TwitchAccessToken");
 
     const token = await request();
 
     if (!token.ok) return undefined;
-    return token.json() as Promise<TwitchClientCredentialsType>;
+    return (await token.json()) as Promise<TwitchClientCredentialsType>;
   }
 };
 
@@ -67,7 +65,7 @@ export const getIdentity = async (token?: RequestCookie) => {
   });
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<IdentityType>;
+  return (await res.json()) as Promise<IdentityType>;
 };
 
 export const refreshIdentity = async (token?: string) => {
@@ -83,7 +81,7 @@ export const refreshIdentity = async (token?: string) => {
   });
 
   if (!res.ok) return undefined;
-  return res.json() as Promise<{
+  return (await res.json()) as Promise<{
     access: string;
     refresh: string;
   }>;
