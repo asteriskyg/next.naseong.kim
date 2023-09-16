@@ -88,7 +88,7 @@ export const CreateClipComponent = ({
     };
 
     if (status === "clipCreate") create();
-  }, [status]);
+  }, [status, identity]);
 
   return component;
 };
