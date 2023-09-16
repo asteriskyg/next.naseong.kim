@@ -9,7 +9,7 @@ export const middleware = async (req: NextRequest) => {
     throw new Error("NEXT_PUBLIC_APP_URL is not defined.");
 
   const nextRes = NextResponse.next();
-  const RedirectRes = NextResponse.redirect(process.env.NEXT_PUBLIC_APP_URL);
+  const RedirectRes = NextResponse.redirect(req.url);
 
   const authorization = req.cookies.get("authorization");
   if (authorization) {
