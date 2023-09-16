@@ -1,42 +1,35 @@
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 300;
-	font-display: "optional";
     src: url('./SUITE-Light.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 400;
-	font-display: "optional";
     src: url('./SUITE-Regular.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 500;
-	font-display: "optional";
     src: url('./SUITE-Medium.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 600;
-	font-display: "optional";
     src: url('./SUITE-SemiBold.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 700;
-	font-display: "optional";
     src: url('./SUITE-Bold.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 800;
-	font-display: "optional";
     src: url('./SUITE-ExtraBold.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'SUITE';
 	font-weight: 900;
-	font-display: "optional";
     src: url('./SUITE-Heavy.woff2') format('woff2');
 }
