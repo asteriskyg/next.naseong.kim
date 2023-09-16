@@ -1,8 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ClipType } from "type";
 
 import { getTimeFromNow } from "@/utils/date";
+
+const Image = dynamic(() => import("next/image"), { ssr: false });
+
 
 const parseClipDuration = (duration: number) => {
   if (duration > 59) return duration - 60 < 10 ? `1:0${duration - 60}` : `1:${duration - 60}`;
