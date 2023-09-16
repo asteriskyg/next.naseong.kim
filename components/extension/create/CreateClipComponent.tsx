@@ -76,7 +76,9 @@ export const CreateClipComponent = ({
 
   useEffect(() => {
     const create = async () => {
-      const response = await createClip();
+      if (!identity) return setStatus("clipCreateFail");
+
+      const response = await createClip(identity);
       if (!response) return setStatus("clipCreateFail");
 
       setClip(response);

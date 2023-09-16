@@ -15,7 +15,7 @@ export const getTwitchStream = async () => {
   const res = await fetch(
     `https://api.twitch.tv/helix/streams?user_id=${process.env.TWITCH_BROADCASTER_ID}`,
     {
-      next: { revalidate: 0 },
+      cache: "no-cache",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
         "Client-Id": process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID,
