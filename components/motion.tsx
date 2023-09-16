@@ -1,7 +1,11 @@
 "use client";
 
 import { ReactNode, ReactElement, Children } from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
+
+export const LazyMotionWrapper = ({ children }: { children: ReactNode }) => {
+  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
+};
 
 export const StaggerChildren = ({
   children,
@@ -35,21 +39,23 @@ export const StaggerChildren = ({
   };
 
   return (
-    <motion.div
-      className={className}
-      variants={variants.list}
-      initial="hidden"
-      animate="visible"
-      exit="remove"
-    >
-      {childrenArray?.map((item) => {
-        return !checkEmptyObject(item.props) ? (
-          <motion.div key={item.key} variants={variants.item}>
-            {item}
-          </motion.div>
-        ) : undefined;
-      })}
-    </motion.div>
+    <LazyMotionWrapper>
+      <m.div
+        className={className}
+        variants={variants.list}
+        initial="hidden"
+        animate="visible"
+        exit="remove"
+      >
+        {childrenArray?.map((item) => {
+          return !checkEmptyObject(item.props) ? (
+            <m.div key={item.key} variants={variants.item}>
+              {item}
+            </m.div>
+          ) : undefined;
+        })}
+      </m.div>
+    </LazyMotionWrapper>
   );
 };
 
@@ -69,13 +75,15 @@ export const MouseHover = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <motion.div
-      variants={variants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="hover"
-    >
-      {children}
-    </motion.div>
+    <LazyMotionWrapper>
+      <m.div
+        variants={variants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="hover"
+      >
+        {children}
+      </m.div>
+    </LazyMotionWrapper>
   );
 };
