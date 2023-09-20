@@ -5,7 +5,9 @@ export const getHmac = (secret: string, message: string) => {
 };
 
 export const verifyMessage = (hmac: string, verifySignature: string | null) => {
-  if (!verifySignature) return false;
+  if (!verifySignature) {
+    return false;
+  }
 
   return timingSafeEqual(Buffer.from(hmac), Buffer.from(verifySignature));
 };
