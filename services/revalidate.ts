@@ -1,4 +1,4 @@
-export const revalidateByToken = async (tag: string) => {
+export const revalidateByTag = async (tag: string) => {
   if (!process.env.NEXT_PUBLIC_APP_URL)
     throw new Error("NEXT_PUBLIC_APP_URL is not defined.");
 

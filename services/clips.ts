@@ -1,6 +1,6 @@
 import type { ClipListsType, ClipType, IdentityType } from "type";
 
-import { revalidateByPath, revalidateByToken } from "./revalidate";
+import { revalidateByPath, revalidateByTag } from "./revalidate";
 
 export const getClipDetail = async (clip: string) => {
   if (!process.env.NEXT_PUBLIC_API_URL)
@@ -22,7 +22,10 @@ export const getRecentClips = async (offset: number) => {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/clip/recent?offset=${offset}`,
-    { next: { tags: ["RecentClipList"] } },
+    {
+      cache: "force-cache",
+      next: { tags: ["RecentClipList"] },
+    },
   );
 
   if (!res.ok) return undefined;
@@ -41,7 +44,7 @@ export const createClip = async (identity: IdentityType) => {
 
   if (!res.ok) return undefined;
 
-  await revalidateByToken("RecentClipList");
+  await revalidateByTag("RecentClipList");
   await revalidateByPath(
     `${process.env.NEXT_PUBLIC_API_URL}/clip/user?id=${identity.twitchUserId}&offset=0`,
   );

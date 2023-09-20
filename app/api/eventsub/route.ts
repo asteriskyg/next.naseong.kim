@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { TWITCH_MESSAGE } from "@/constants/twitch";
 import { getHmac, verifyMessage } from "@/utils/crypto";
-import { revalidateByToken } from "@/services/revalidate";
+import { revalidateByTag } from "@/services/revalidate";
 
 const getHmacMessage = (
   id: string,
@@ -47,9 +47,9 @@ export async function POST(request: NextRequest) {
     if (
       event === "channel.update" ||
       event === "stream.online" ||
-      event === "stream.online"
+      event === "stream.offline"
     ) {
-      await revalidateByToken("StreamStatus");
+      await revalidateByTag("StreamStatus");
       return new NextResponse(undefined, { status: 204 });
     }
 

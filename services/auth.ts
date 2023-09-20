@@ -1,6 +1,6 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-import { revalidateByToken } from "@/services/revalidate";
+import { revalidateByTag } from "@/services/revalidate";
 import type { IdentityType, TwitchClientCredentialsType } from "type";
 
 export const getTwitchAccessToken = async () => {
@@ -26,7 +26,7 @@ export const getTwitchAccessToken = async () => {
 
     return (await token.json()) as Promise<TwitchClientCredentialsType>;
   } catch (e) {
-    await revalidateByToken("TwitchAccessToken");
+    await revalidateByTag("TwitchAccessToken");
 
     const token = await request();
 
