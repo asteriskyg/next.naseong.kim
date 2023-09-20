@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
   const hmac = `sha256=${getHmac(secret, message)}`;
 
   if (
-    verifyMessage(hmac, request.headers.get(TWITCH_MESSAGE_SIGNATURE)) ||
+    !verifyMessage(hmac, request.headers.get(TWITCH_MESSAGE_SIGNATURE)) ||
     !request.headers.get(MESSAGE_TYPE)
   ) {
     return new NextResponse(undefined, { status: 403 });
