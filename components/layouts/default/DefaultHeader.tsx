@@ -22,7 +22,7 @@ export const DefaultHeader = async () => {
   const me = await getIdentity(token);
 
   return (
-    <header className="relative z-10 flex h-14 justify-center border-b bg-slate-50/90 backdrop-blur-xl dark:border-neutral-600 dark:bg-twitch-dark/90">
+    <header className="relative z-10 flex h-14 justify-center border-b bg-slate-50/90 dark:border-neutral-700 dark:bg-neutral-950/40">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-x-3">
           <Link href="/" className="-m-1.5 flex items-start p-1.5">
