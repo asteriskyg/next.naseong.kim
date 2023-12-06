@@ -38,7 +38,13 @@ export const getTwitchAccessToken = async () => {
   const token = (await res.json()) as TwitchClientCredentialsType;
 
   const validate = await validateTwitchAccessToken(token.access_token);
-  if (!validate) revalidateByTag("twitch-access-token");
+  if (!validate) {
+    revalidateByTag("twitch-access-token");
+    const newToken =
+      (await getTwitchAccessToken()) as TwitchClientCredentialsType;
+
+    return newToken;
+  }
 
   return token;
 };

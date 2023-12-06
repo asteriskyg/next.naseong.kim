@@ -26,7 +26,7 @@ export const getTwitchStream = async () => {
 
   if (!res.ok)
     throw new Error(
-      `Failed to get Twitch Stream: ${res.statusText} ${await res.text()}`,
+      `Failed to get Twitch Stream: ${res.statusText} ${token} ${await res.text()}`,
     );
   return (await res.json()) as Promise<StreamInfoType>;
 };
