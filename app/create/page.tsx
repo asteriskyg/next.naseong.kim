@@ -13,7 +13,7 @@ import { CreateClip } from "@/components/extension/create/CreateClip";
 export default async function Index() {
   return (
     <div className="bg-white dark:bg-twitch-dark">
-      <StaggerChildren className="m-auto flex max-w-[26rem] flex-col gap-6 p-6">
+      <StaggerChildren className="m-auto flex max-w-sm flex-col gap-6 p-6">
         <AdCard />
         <Suspense fallback={<StreamFetching />}>
           <CreateClip />

@@ -53,7 +53,7 @@ export const Card = ({
 
   return (
     <div
-      className={`flex-col rounded-3xl p-6 selection:items-center md:flex ${bgColorSchemePicker(
+      className={`w-full max-w-sm shrink-0 snap-start snap-always flex-col justify-between rounded-3xl p-6 selection:items-center md:flex ${bgColorSchemePicker(
         color,
       )}`}
     >
@@ -145,5 +145,31 @@ export const AnchorButton = ({
     >
       {text}
     </a>
+  );
+};
+
+export const DefaultModal = ({
+  title,
+  content,
+  buttons,
+}: {
+  title: string;
+  content: string;
+  buttons: JSX.Element[];
+}) => {
+  const buttonList = buttons?.map((item) => {
+    return item;
+  });
+
+  return (
+    <div className="flex w-full max-w-sm flex-col gap-4 rounded-3xl bg-white p-6">
+      <div className="flex flex-col gap-2">
+        <div className="text-2xl font-bold text-black dark:text-slate-200">
+          {title}
+        </div>
+        <div className="text-black dark:text-slate-200">{content}</div>
+      </div>
+      <div className="flex flex-col gap-2">{buttonList}</div>
+    </div>
   );
 };

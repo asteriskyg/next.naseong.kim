@@ -79,7 +79,8 @@ export const StreamOffline = () => {
   return (
     <Card
       emoji="💤"
-      title="방송이 꺼져있을 때..."
+      title="오프라인"
+      subtitle="방송이 꺼져있을 때..."
       color="slate"
       buttons={[
         <AnchorButton
