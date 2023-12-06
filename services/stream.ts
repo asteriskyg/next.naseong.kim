@@ -20,19 +20,10 @@ export const getTwitchStream = async () => {
         "Client-Id": process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID,
       },
       cache: "force-cache",
-      next: { tags: ["StreamStatus"] },
+      next: { tags: ["stream-status"] },
     },
   );
 
   if (!res.ok) return undefined;
   return (await res.json()) as Promise<StreamInfoType>;
 };
-
-// export const getTwitchStreamProxy = async () => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/streamV2`).catch(
-//     () => undefined,
-//   );
-//
-//   if (!res?.ok) return undefined;
-//   return (await res.json()) as Promise<StreamInfoType>;
-// };

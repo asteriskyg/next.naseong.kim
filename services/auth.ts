@@ -14,7 +14,7 @@ export const getTwitchAccessToken = async () => {
     return fetch(
       `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
       {
-        next: { tags: ["TwitchAccessToken"] },
+        next: { tags: ["twitch-access-token"] },
         cache: "force-cache",
         method: "POST",
       },
@@ -26,7 +26,7 @@ export const getTwitchAccessToken = async () => {
 
     return (await token.json()) as Promise<TwitchClientCredentialsType>;
   } catch (e) {
-    await revalidateByTag("TwitchAccessToken");
+    revalidateByTag("twitch-access-token");
 
     const token = await request();
 

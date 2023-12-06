@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       event === "stream.online" ||
       event === "stream.offline"
     ) {
-      await revalidateByTag("StreamStatus");
+      revalidateByTag("stream-status");
       return new NextResponse(undefined, { status: 204 });
     }
 
