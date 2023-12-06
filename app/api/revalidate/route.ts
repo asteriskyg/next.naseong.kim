@@ -7,12 +7,12 @@ export async function POST(request: NextRequest) {
 
   if (tag) {
     revalidateTag(tag);
-    return NextResponse.json({ revalidated: true, now: Date.now() });
+    return NextResponse.json({ revalidated: true, now: Date.now(), tag });
   }
 
   if (path) {
     revalidatePath(path);
-    return NextResponse.json({ revalidated: true, now: Date.now() });
+    return NextResponse.json({ revalidated: true, now: Date.now(), path });
   }
 
   return NextResponse.json(

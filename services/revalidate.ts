@@ -8,7 +8,9 @@ export const revalidateByTag = async (tag: string) => {
   );
 
   if (!res.ok) return undefined;
-  return res.json();
+  const result = await res.json();
+
+  return result;
 };
 
 export const revalidateByPath = async (path: string) => {
@@ -21,5 +23,7 @@ export const revalidateByPath = async (path: string) => {
   );
 
   if (!res.ok) return undefined;
-  return res.json();
+  const result = await res.json();
+
+  return result;
 };
