@@ -1,4 +1,33 @@
-import type { ClipListsType, ClipType, IdentityType } from "type";
+import type {
+  ClipListsType,
+  ClipStatusType,
+  ClipType,
+  IdentityType,
+} from "type";
+
+export const getClipStatus = async (clip: ClipType) => {
+  if (!process.env.CLOUDFLARE_ACCOUNT_ID)
+    throw new Error("CLOUDFLARE_ACCOUNT_ID is not defined.");
+
+  if (!process.env.CLOUDFLARE_ACCOUNT_SECRET)
+    throw new Error("CLOUDFLARE_ACCOUNT_SECRET is not defined.");
+
+  const res = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/stream/${clip.contentId}/downloads`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.CLOUDFLARE_ACCOUNT_SECRET}`,
+      },
+      next: {
+        tags: ["activate-clip"],
+      },
+    },
+  );
+
+  if (!res.ok) return undefined;
+  return (await res.json()) as Promise<ClipStatusType>;
+};
 
 export const getClipDetail = async (clip: string) => {
   if (!process.env.NEXT_PUBLIC_API_URL)

@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cookies } from "next/headers";
 
+import { getIdentity } from "@/services/auth";
 import { getUserDetail } from "@/services/users";
-import { getClipDetail, getRecentClips } from "@/services/clips";
+import { getClipDetail, getClipStatus, getRecentClips } from "@/services/clips";
 import {
   getFormattedDate,
   getTimeFromNow,
   getClippedTimestamp,
-  getTimeDiff,
 } from "@/utils/date";
+import { revalidateByTag } from "@/services/revalidate";
 
 import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
 import { DefaultFooter } from "@/components/layouts/default/DefaultFooter";
@@ -22,14 +24,38 @@ export default async function ClipDetail({
     clip: string;
   };
 }) {
+  const token = cookies().get("authorization");
+
+  const identityData = getIdentity(token);
   const clipData = getClipDetail(params.clip);
   const clipListsData = getRecentClips(0);
-  const [clip, clipLists] = await Promise.all([clipData, clipListsData]);
-  const user = await getUserDetail(clip?.creatorId);
 
-  if (!clip || !user) return <div>404</div>;
+  const [identity, clip, clipLists] = await Promise.all([
+    identityData,
+    clipData,
+    clipListsData,
+  ]);
 
-  const clipLastEdited = getTimeDiff(Date.now(), clip.clipLastEdited, "m");
+  if (!clip) return <div>404</div>;
+
+  const userData = getUserDetail(clip?.creatorId);
+  const statusData = getClipStatus(clip);
+
+  const [user, status] = await Promise.all([userData, statusData]);
+  let isClipActivated = false;
+
+  if (!user) return <div>404</div>;
+
+  if (!status) {
+    isClipActivated = false;
+    revalidateByTag("activate-clip");
+  } else if (status.result?.default.status === "ready") {
+    isClipActivated = true;
+  } else {
+    isClipActivated = false;
+    revalidateByTag("activate-clip");
+  }
+
   const streamDate = getFormattedDate(clip.streamStartedAt, "YYYY년 MM월 DD일");
   const timeFromNow = getTimeFromNow(clip.streamStartedAt);
   const timestamp = getClippedTimestamp(
@@ -50,7 +76,7 @@ export default async function ClipDetail({
             allowFullScreen
           />
         </div>
-        {clipLastEdited <= 10 ? (
+        {!isClipActivated ? (
           <div className="sm:text-md text-dark mx-6 mt-6 flex flex-col items-start rounded-3xl bg-orange-100 p-4 dark:bg-yellow-800/50 dark:text-slate-200 sm:mx-0 sm:text-lg md:flex-row md:items-center">
             <svg
               className="mb-3 mr-3 h-6 w-6 animate-spin text-orange-500 dark:text-yellow-600 md:mb-0"
@@ -78,7 +104,7 @@ export default async function ClipDetail({
             </div>
           </div>
         ) : undefined}
-        <div className="flex flex-col items-start justify-between rounded-3xl p-6 text-black dark:text-slate-200 sm:my-6 sm:bg-slate-100 sm:dark:bg-neutral-800">
+        <div className="flex flex-col items-start justify-between rounded-3xl p-6 pb-3 text-black dark:text-slate-200 sm:my-6 sm:bg-slate-100 sm:pb-6 sm:dark:bg-neutral-800">
           <div>
             <div className="line-clamp-1 text-xl sm:text-2xl">
               {clip.contentName}
@@ -96,7 +122,7 @@ export default async function ClipDetail({
             </div>
           </div>
         </div>
-        <div className="mb-6 flex px-6 sm:px-0">
+        <div className="mb-6 flex flex-col-reverse items-start justify-between gap-y-6 px-6 sm:flex-row sm:items-center sm:px-0">
           <Link
             href={`/profile/${user.twitchUserId}`}
             className="text-dark flex w-full items-center justify-between rounded-3xl bg-slate-100 px-4 py-3 transition-all ease-in-out after:w-2 after:-translate-x-full after:opacity-0 after:transition-all after:ease-in-out after:content-['>'] hover:bg-slate-200 hover:after:translate-x-0 hover:after:opacity-100 dark:bg-neutral-800 dark:text-slate-200 hover:dark:bg-neutral-700 sm:w-auto sm:pl-4 sm:pr-0 after:sm:ml-2 sm:after:block sm:hover:pr-4"
@@ -112,6 +138,31 @@ export default async function ClipDetail({
               {user.displayName}
             </span>
           </Link>
+          {user.twitchUserId === identity?.twitchUserId ||
+          identity?.userType !== "viewer" ? (
+            <div className="flex gap-3">
+              {isClipActivated ? (
+                <Link
+                  href={
+                    isClipActivated
+                      ? `https://videodelivery.net/${clip.contentId}/downloads/default.mp4?filename=naseongkim-clip__${clip.clipName}.mp4`
+                      : "#"
+                  }
+                  className="text-dark flex w-auto items-center rounded-3xl bg-blue-100 px-4 py-3 pl-4 pr-0 transition-all ease-in-out after:ml-2 after:block after:w-2 after:-translate-x-full after:opacity-0 after:transition-all after:ease-in-out after:content-['>'] hover:bg-blue-200 hover:pr-4 hover:after:translate-x-0 hover:after:opacity-100 dark:bg-blue-950 dark:text-slate-200 hover:dark:bg-blue-900 sm:rounded-2xl"
+                >
+                  <span className="mr-2 text-xl">💾</span> 다운로드
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  type="button"
+                  className="text-dark flex w-auto cursor-not-allowed items-center rounded-3xl bg-slate-100 px-4 py-3 opacity-60 transition-all ease-in-out dark:bg-neutral-800 dark:text-slate-200"
+                >
+                  <span className="mr-2 text-xl">💾</span> 동영상 처리 중
+                </button>
+              )}
+            </div>
+          ) : undefined}
         </div>
         <div className="mx-auto max-w-7xl px-6 py-8 sm:px-0">
           <div className="relative mb-6">

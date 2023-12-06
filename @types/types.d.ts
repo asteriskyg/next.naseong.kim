@@ -65,4 +65,17 @@ declare module "type" {
   };
 
   export type ClipListsType = ClipType[];
+
+  export type ClipStatusType = {
+    result: {
+      default: {
+        status: "inprogress" | "ready";
+        url: string;
+        percentComplete: number;
+      };
+    } | null;
+    success: boolean;
+    errors: [];
+    messages: [];
+  };
 }
