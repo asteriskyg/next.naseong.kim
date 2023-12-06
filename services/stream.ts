@@ -10,7 +10,7 @@ export const getTwitchStream = async () => {
     throw new Error("TWITCH_CLIENT_ID is not defined.");
 
   const token = await getTwitchAccessToken();
-  if (!token) return undefined;
+  if (!token) throw new Error("Failed to get Twitch Access Token");
 
   const res = await fetch(
     `https://api.twitch.tv/helix/streams?user_id=${process.env.TWITCH_BROADCASTER_ID}`,
@@ -24,6 +24,6 @@ export const getTwitchStream = async () => {
     },
   );
 
-  if (!res.ok) return undefined;
+  if (!res.ok) throw new Error("Failed to get Stream Status");
   return (await res.json()) as Promise<StreamInfoType>;
 };

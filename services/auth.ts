@@ -23,11 +23,9 @@ export const getTwitchAccessToken = async () => {
 
   try {
     const token = await request();
-
     return (await token.json()) as Promise<TwitchClientCredentialsType>;
   } catch (e) {
     revalidateByTag("twitch-access-token");
-
     const token = await request();
 
     if (!token.ok) return undefined;
