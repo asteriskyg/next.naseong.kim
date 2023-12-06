@@ -71,3 +71,25 @@ export const createClip = async (identity: IdentityType) => {
   if (!res.ok) return undefined;
   return (await res.json()) as Promise<ClipType>;
 };
+
+export const deleteClip = async (
+  identity: IdentityType | undefined,
+  clip: ClipType,
+) => {
+  if (!process.env.NEXT_PUBLIC_API_URL)
+    throw new Error("NEXT_PUBLIC_API_URL is not defined.");
+
+  if (!identity) throw new Error("Identity is undefined.");
+  if (!clip) throw new Error("Clip is undefined.");
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/clip/delete?id=${clip.clipName}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    },
+  );
+
+  if (!res.ok) return undefined;
+  return null;
+};

@@ -12,6 +12,7 @@ import {
 } from "@/utils/date";
 import { revalidateByTag } from "@/services/revalidate";
 
+import { DeleteButton } from "./_components/DeleteButton";
 import { DefaultHeader } from "@/components/layouts/default/DefaultHeader";
 import { DefaultFooter } from "@/components/layouts/default/DefaultFooter";
 import { RecentClips } from "@/components/RecentClips";
@@ -161,6 +162,7 @@ export default async function ClipDetail({
                   <span className="mr-2 text-xl">💾</span> 동영상 처리 중
                 </button>
               )}
+              <DeleteButton clip={clip} identity={identity} />
             </div>
           ) : undefined}
         </div>
