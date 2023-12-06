@@ -3,6 +3,20 @@ import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { revalidateByTag } from "@/services/revalidate";
 import type { IdentityType, TwitchClientCredentialsType } from "type";
 
+export const validateTwitchAccessToken = async (token: string) => {
+  if (!token) return undefined;
+
+  const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) return undefined;
+  return true;
+};
+
 export const getTwitchAccessToken = async () => {
   if (!process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
     throw new Error("TWITCH_CLIENT_ID is not defined.");
@@ -10,27 +24,25 @@ export const getTwitchAccessToken = async () => {
   if (!process.env.TWITCH_CLIENT_SECRET)
     throw new Error("TWITCH_CLIENT_SECRET is not defined.");
 
-  const request = async () => {
-    return fetch(
-      `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
-      {
-        next: { tags: ["twitch-access-token"] },
-        cache: "force-cache",
-        method: "POST",
-      },
-    );
-  };
+  const res = await fetch(
+    `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`,
+    {
+      next: { tags: ["twitch-access-token"] },
+      cache: "force-cache",
+      method: "POST",
+    },
+  );
 
-  try {
-    const token = await request();
-    return (await token.json()) as Promise<TwitchClientCredentialsType>;
-  } catch (e) {
+  if (!res.ok) return undefined;
+  const token = (await res.json()) as TwitchClientCredentialsType;
+
+  const validate = await validateTwitchAccessToken(token.access_token);
+  if (!validate) {
     revalidateByTag("twitch-access-token");
-    const token = await request();
-
-    if (!token.ok) return undefined;
-    return (await token.json()) as Promise<TwitchClientCredentialsType>;
+    getTwitchAccessToken();
   }
+
+  return token;
 };
 
 export const getServiceToken = async (code: string | null) => {
