@@ -1,7 +1,5 @@
 import type { ClipListsType, ClipType, IdentityType } from "type";
 
-import { revalidateByPath, revalidateByTag } from "./revalidate";
-
 export const getClipDetail = async (clip: string) => {
   if (!process.env.NEXT_PUBLIC_API_URL)
     throw new Error("NEXT_PUBLIC_API_URL is not defined.");
@@ -23,8 +21,7 @@ export const getRecentClips = async (offset: number) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/clip/recent?offset=${offset}`,
     {
-      cache: "force-cache",
-      next: { tags: ["RecentClipList"] },
+      cache: "no-store",
     },
   );
 
@@ -43,10 +40,5 @@ export const createClip = async (identity: IdentityType) => {
   });
 
   if (!res.ok) return undefined;
-
-  await revalidateByTag("RecentClipList");
-  await revalidateByPath(
-    `${process.env.NEXT_PUBLIC_API_URL}/clip/user?id=${identity.twitchUserId}&offset=0`,
-  );
   return (await res.json()) as Promise<ClipType>;
 };

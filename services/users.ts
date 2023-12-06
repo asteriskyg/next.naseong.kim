@@ -22,6 +22,9 @@ export const getUserClips = async (user: number, offset: number) => {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/clip/user?id=${user}&offset=${offset}`,
+    {
+      cache: "no-store",
+    },
   );
 
   if (!res.ok) return undefined;
